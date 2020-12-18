@@ -80,6 +80,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/Employee.h">
+			<Option target="PayrollManegementSystem"/>
+		</Unit>
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/People.h">
+			<Option target="PayrollManegementSystem"/>
+		</Unit>
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Operations/Operations.cpp">
+			<Option target="PayrollManegementSystem"/>
+		</Unit>
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Screens/Employee/Employee_Main_Screen.cpp">
+			<Option target="PayrollManegementSystem"/>
+		</Unit>
 		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/main.cpp">
 			<Option target="PayrollManegementSystem"/>
 		</Unit>

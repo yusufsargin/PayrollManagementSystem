@@ -127,6 +127,60 @@ PayrollManegementSystem\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\build
 .PHONY : PayrollManegementSystem\fast
 
+Operations\Operations.obj: Operations\Operations.cpp.obj
+
+.PHONY : Operations\Operations.obj
+
+# target to build an object file
+Operations\Operations.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Operations\Operations.cpp.obj
+.PHONY : Operations\Operations.cpp.obj
+
+Operations\Operations.i: Operations\Operations.cpp.i
+
+.PHONY : Operations\Operations.i
+
+# target to preprocess a source file
+Operations\Operations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Operations\Operations.cpp.i
+.PHONY : Operations\Operations.cpp.i
+
+Operations\Operations.s: Operations\Operations.cpp.s
+
+.PHONY : Operations\Operations.s
+
+# target to generate assembly for a file
+Operations\Operations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Operations\Operations.cpp.s
+.PHONY : Operations\Operations.cpp.s
+
+Screens\Employee\Employee_Main_Screen.obj: Screens\Employee\Employee_Main_Screen.cpp.obj
+
+.PHONY : Screens\Employee\Employee_Main_Screen.obj
+
+# target to build an object file
+Screens\Employee\Employee_Main_Screen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj
+.PHONY : Screens\Employee\Employee_Main_Screen.cpp.obj
+
+Screens\Employee\Employee_Main_Screen.i: Screens\Employee\Employee_Main_Screen.cpp.i
+
+.PHONY : Screens\Employee\Employee_Main_Screen.i
+
+# target to preprocess a source file
+Screens\Employee\Employee_Main_Screen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.i
+.PHONY : Screens\Employee\Employee_Main_Screen.cpp.i
+
+Screens\Employee\Employee_Main_Screen.s: Screens\Employee\Employee_Main_Screen.cpp.s
+
+.PHONY : Screens\Employee\Employee_Main_Screen.s
+
+# target to generate assembly for a file
+Screens\Employee\Employee_Main_Screen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.s
+.PHONY : Screens\Employee\Employee_Main_Screen.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -163,6 +217,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... PayrollManegementSystem
+	@echo ... Operations/Operations.obj
+	@echo ... Operations/Operations.i
+	@echo ... Operations/Operations.s
+	@echo ... Screens/Employee/Employee_Main_Screen.obj
+	@echo ... Screens/Employee/Employee_Main_Screen.i
+	@echo ... Screens/Employee/Employee_Main_Screen.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

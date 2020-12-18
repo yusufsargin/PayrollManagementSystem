@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/PayrollManegementSystem.dir/Operations/Operations.cpp.obj"
+  "CMakeFiles/PayrollManegementSystem.dir/Screens/Employee/Employee_Main_Screen.cpp.obj"
   "CMakeFiles/PayrollManegementSystem.dir/main.cpp.obj"
   "PayrollManegementSystem.exe"
   "PayrollManegementSystem.exe.manifest"

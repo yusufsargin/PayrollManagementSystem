@@ -1,6 +1,16 @@
 #include <iostream>
+#include <string>
+#include "Screens/Employee/Employee_Main_Screen.cpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    EmployeeMainScreen employeeMainScreen;
+
+    switch (employeeMainScreen.displayOperationsValuesAndGetValue()) {
+        case SHOW_MY_INFO:
+            break;
+        default:
+            break;
+    }
+
     return 0;
 }

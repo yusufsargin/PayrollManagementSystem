@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Operations/Operations.cpp" "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/cmake-build-debug/CMakeFiles/PayrollManegementSystem.dir/Operations/Operations.cpp.obj"
+  "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Screens/Employee/Employee_Main_Screen.cpp" "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/cmake-build-debug/CMakeFiles/PayrollManegementSystem.dir/Screens/Employee/Employee_Main_Screen.cpp.obj"
   "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/main.cpp" "C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/cmake-build-debug/CMakeFiles/PayrollManegementSystem.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
