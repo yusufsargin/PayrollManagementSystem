@@ -3,10 +3,16 @@
 
 CMakeFiles\PayrollManegementSystem.dir\Operations\Operations.cpp.obj: ..\Operations\Operations.cpp
 
-CMakeFiles\PayrollManegementSystem.dir\Screens\Employee_Main_Screen.cpp.obj: ..\Operations\Operations.cpp
-CMakeFiles\PayrollManegementSystem.dir\Screens\Employee_Main_Screen.cpp.obj: ..\Screens\Employee_Main_Screen.cpp
+CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj: ..\Models\Employee.h
+CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj: ..\Models\People.h
+CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj: ..\Models\Task.h
+CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj: ..\Operations\Operations.cpp
+CMakeFiles\PayrollManegementSystem.dir\Screens\Employee\Employee_Main_Screen.cpp.obj: ..\Screens\Employee\Employee_Main_Screen.cpp
 
+CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Models\Employee.h
+CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Models\People.h
+CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Models\Task.h
 CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Operations\Operations.cpp
-CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Screens\Employee_Main_Screen.cpp
+CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\Screens\Employee\Employee_Main_Screen.cpp
 CMakeFiles\PayrollManegementSystem.dir\main.cpp.obj: ..\main.cpp
 

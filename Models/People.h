@@ -6,6 +6,7 @@
 #define PAYROLLMANEGEMENTSYSTEM_PEOPLE_H
 
 #include <string>
+#include <time.h>
 
 using namespace std;
 
@@ -27,6 +28,37 @@ private:
     int childNumber;
     int dayOffNumber;
 public:
+    People() : password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
+               phone{"000000000"},
+               email{""}, salary{0}, enterDate{""}, childNumber{0}, dayOffNumber{0} {
+        this->userId = generateRandomNumber();
+        getPassword();
+    }
+
+    People(string firstName, string lastName, char sex, int TC, string phone) : People() {
+        this->firstName = firstName;
+        this->lastName = lastName;
+        this->sex = sex;
+        this->TC = TC;
+        this->phone = phone;
+    }
+
+    People(People &obj) {
+        this->userId = generateRandomNumber();
+        this->password = obj.password;
+        this->firstName = obj.firstName;
+        this->lastName = obj.lastName;
+        this->sex = obj.sex;
+        this->TC = obj.TC;
+        this->phone = obj.phone;
+    }
+
+    double generateRandomNumber() {
+        srand(time(NULL));
+
+        return rand() % 1000 + 1;
+    }
+
     int getUserId() const {
         return userId;
     }
@@ -35,7 +67,12 @@ public:
         this->userId = userId;
     }
 
-    int getPassword() const {
+    int getPassword() {
+        if (password == 0) {
+            cout << "Enter your password please?" << endl;
+            cin >> password;
+        }
+
         return password;
     }
 

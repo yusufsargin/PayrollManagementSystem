@@ -12,5 +12,7 @@ int main() {
             break;
     }
 
+    employeeMainScreen.createEmployee();
+
     return 0;
 }

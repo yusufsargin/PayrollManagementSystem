@@ -86,6 +86,9 @@
 		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/People.h">
 			<Option target="PayrollManegementSystem"/>
 		</Unit>
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/Task.h">
+			<Option target="PayrollManegementSystem"/>
+		</Unit>
 		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Operations/Operations.cpp">
 			<Option target="PayrollManegementSystem"/>
 		</Unit>

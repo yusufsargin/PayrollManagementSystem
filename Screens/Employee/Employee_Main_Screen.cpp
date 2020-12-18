@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "../../Operations/Operations.cpp"
+#include "../../Models/Employee.h"
 
 /*
 Önüne Menu çıkacak
@@ -34,6 +35,7 @@ class EmployeeMainScreen {
                                    "3.Show Done Tasks",
                                    "4.Show Bonus Amount",
                                    "5.Exit"};
+    Employee *employee;
 public:
     int displayOperationsValuesAndGetValue() {
         Operations operations{operationsValue};
@@ -41,5 +43,13 @@ public:
         operations.displayOperations("Employee");
 
         return operations.getInputValue();
+    }
+
+    void createEmployee() {
+        employee = new Employee("Yusuf", "Sargın", 'M', 123123, "12312312");
+
+        employee->displayMyInfo();
+
+        delete employee;
     }
 };
