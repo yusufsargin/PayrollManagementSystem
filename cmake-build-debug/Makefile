@@ -127,6 +127,33 @@ PayrollManegementSystem\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\build
 .PHONY : PayrollManegementSystem\fast
 
+Models\Employee.obj: Models\Employee.cpp.obj
+
+.PHONY : Models\Employee.obj
+
+# target to build an object file
+Models\Employee.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Models\Employee.cpp.obj
+.PHONY : Models\Employee.cpp.obj
+
+Models\Employee.i: Models\Employee.cpp.i
+
+.PHONY : Models\Employee.i
+
+# target to preprocess a source file
+Models\Employee.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Models\Employee.cpp.i
+.PHONY : Models\Employee.cpp.i
+
+Models\Employee.s: Models\Employee.cpp.s
+
+.PHONY : Models\Employee.s
+
+# target to generate assembly for a file
+Models\Employee.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PayrollManegementSystem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\PayrollManegementSystem.dir\Models\Employee.cpp.s
+.PHONY : Models\Employee.cpp.s
+
 Operations\Operations.obj: Operations\Operations.cpp.obj
 
 .PHONY : Operations\Operations.obj
@@ -217,6 +244,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... PayrollManegementSystem
+	@echo ... Models/Employee.obj
+	@echo ... Models/Employee.i
+	@echo ... Models/Employee.s
 	@echo ... Operations/Operations.obj
 	@echo ... Operations/Operations.i
 	@echo ... Operations/Operations.s

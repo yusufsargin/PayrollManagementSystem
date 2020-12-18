@@ -7,12 +7,11 @@ int main() {
 
     switch (employeeMainScreen.displayOperationsValuesAndGetValue()) {
         case SHOW_MY_INFO:
+            employeeMainScreen.showEmployeeInfo();
             break;
         default:
             break;
     }
-
-    employeeMainScreen.createEmployee();
 
     return 0;
 }

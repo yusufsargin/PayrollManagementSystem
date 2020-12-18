@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 #include "../../Operations/Operations.cpp"
-#include "../../Models/Employee.h"
+#include "../../Models/Employee.cpp"
+#include "../../Models/Task.h"
 
 /*
 Önüne Menu çıkacak
@@ -37,19 +38,32 @@ class EmployeeMainScreen {
                                    "5.Exit"};
     Employee *employee;
 public:
+    EmployeeMainScreen() {
+        this->employee = new Employee("Yusuf", "Sargin", 'M', 123123123, "12321312");
+    }
+
+    ~EmployeeMainScreen() {
+        delete employee;
+    }
+
+    Employee getEmployeeValueFromStorage() {
+        Employee employeeValue{"Yusuf", "Sargin", 'M', 123123123, "12321312"};
+
+        this->employee = new Employee(employeeValue.getFirstName(), employeeValue.getLastName(), employeeValue.getSex(),
+                                      employeeValue.getTc(), employeeValue.getPhone());
+
+        return employeeValue;
+    }
+
     int displayOperationsValuesAndGetValue() {
         Operations operations{operationsValue};
 
-        operations.displayOperations("Employee");
+        operations.displayOperations("Employee Operations");
 
         return operations.getInputValue();
     }
 
-    void createEmployee() {
-        employee = new Employee("Yusuf", "Sargın", 'M', 123123, "12312312");
-
-        employee->displayMyInfo();
-
-        delete employee;
+    void showEmployeeInfo() {
+        this->employee->displayMyInfo();
     }
 };

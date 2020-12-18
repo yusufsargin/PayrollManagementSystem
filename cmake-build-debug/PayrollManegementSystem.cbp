@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/Employee.h">
+		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/Employee.cpp">
 			<Option target="PayrollManegementSystem"/>
 		</Unit>
 		<Unit filename="C:/Users/YUSUF/CLionProjects/PayrollManegementSystem/Models/People.h">

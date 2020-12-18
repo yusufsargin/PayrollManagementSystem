@@ -21,11 +21,15 @@ public:
     }
 
     void displayOperations(string header = "Operations") {
+        cout << "----------------------------------" << endl;
+
         cout << header << endl;
 
         for (string operation:operations) {
             cout << operation << endl;
         }
+
+        cout << "----------------------------------" << endl;
     }
 
     int getInputValue() {
