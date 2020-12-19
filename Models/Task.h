@@ -17,6 +17,12 @@ enum TaskLevels {
     VERY_HARD
 };
 
+enum TaskStatus {
+    WAITING,
+    IN_PROGRESS,
+    DONE
+};
+
 class Task {
     int id;
     string taskTitle;
@@ -24,8 +30,9 @@ class Task {
     string description;
     string requirements;
     TaskLevels level;
+    TaskStatus taskStatus;
 public:
-    Task() : id{0}, taskTitle{""}, dueDate{""}, description{""}, requirements{""}, level{EASY} {
+    Task() : id{0}, taskTitle{""}, dueDate{""}, description{""}, requirements{""}, level{EASY}, taskStatus{WAITING} {
         id = generateRandomNumber();
     }
 
@@ -40,6 +47,14 @@ public:
         srand(time(NULL));
 
         return rand() % 1000 + 1;
+    }
+
+    TaskStatus getTaskStatus() const {
+        return taskStatus;
+    }
+
+    void setTaskStatus(TaskStatus taskStatus) {
+        Task::taskStatus = taskStatus;
     }
 
     int getId() const {

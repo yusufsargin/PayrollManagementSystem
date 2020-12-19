@@ -27,6 +27,21 @@ class Employee : public People {
     double bonus;
     bool isActive;
     double workHours;
+
+private:
+    string convertTaskStatusTypes(TaskStatus taskStatus) {
+        switch (taskStatus) {
+            case WAITING:
+                return "WAITING";
+            case IN_PROGRESS:
+                return "IN PROGRESS";
+            case DONE:
+                return "DONE";
+            default:
+                return "INVALID TYPE";
+        }
+    }
+
 public:
     Employee() : People() {
         this->department = Intern;
@@ -116,13 +131,33 @@ public:
 
         cout << left << setw(GAP) << "Task ID" <<
              left << setw(GAP) << "Task Title" <<
-             left << setw(GAP) << "Task Description"
+             left << setw(GAP) << "Task Description" <<
+             left << setw(GAP) << "Task Status"
              << left << setw(GAP) << "Task Diff Level" << endl;
         for (Task task:*tasks) {
             cout << left << setw(GAP) << task.getId();
             cout << left << setw(GAP) << task.getTaskTitle();
             cout << left << setw(GAP) << task.getDescription();
+            cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
             cout << left << setw(GAP) << task.getLevel() << endl;
+        }
+    }
+
+    void showAccordingToStatus(TaskStatus taskStatus) {
+        cout << "----Existing Tasks-----" << endl;
+
+        cout << left << setw(GAP) << "Task ID" <<
+             left << setw(GAP) << "Task Title" <<
+             left << setw(GAP) << "Task Description"
+             << left << setw(GAP) << "Task Diff Level" << endl;
+        for (Task task:*tasks) {
+            if (task.getTaskStatus() == taskStatus) {
+                cout << left << setw(GAP) << task.getId();
+                cout << left << setw(GAP) << task.getTaskTitle();
+                cout << left << setw(GAP) << task.getDescription();
+                cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
+                cout << left << setw(GAP) << task.getLevel() << endl;
+            }
         }
     }
 
