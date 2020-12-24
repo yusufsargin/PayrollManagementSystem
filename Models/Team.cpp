@@ -2,8 +2,8 @@
 // Created by yusuf_sargin on 24.12.2020.
 //
 
-#ifndef PAYROLLMANEGEMENTSYSTEM_TEAM_H
-#define PAYROLLMANEGEMENTSYSTEM_TEAM_H
+#ifndef PAYROLLMANEGEMENTSYSTEM_TEAM_CPP
+#define PAYROLLMANEGEMENTSYSTEM_TEAM_CPP
 
 #include "Employee.cpp"
 #include <vector>
@@ -30,7 +30,7 @@ public:
     }
 
     Employee getEmployeeById(int id) {
-        Employee returnEmployee;
+        Employee returnEmployee{};
 
         for (Employee employee: employeeList) {
             if (id == employee.getUserId()) {
@@ -42,4 +42,4 @@ public:
     }
 };
 
-#endif //PAYROLLMANEGEMENTSYSTEM_TEAM_H
+#endif //PAYROLLMANEGEMENTSYSTEM_TEAM_CPP

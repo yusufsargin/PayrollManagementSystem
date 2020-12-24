@@ -59,13 +59,14 @@ public:
         this->isActive = false;
         this->workHours = 0;
         this->tasks = new vector<Task>();
+        this->GAP = 20;
     }
 
     ~Employee() {
         delete tasks;
     }
 
-    Employee(Employee &obj) {
+    Employee(Employee const &obj) {
         int taskSize = tasks->size();
         delete tasks;
 
@@ -73,6 +74,7 @@ public:
         bonus = obj.bonus;
         isActive = obj.isActive;
         workHours = obj.workHours;
+        GAP = obj.GAP;
 
         tasks = new vector<Task>();
 
@@ -195,6 +197,25 @@ public:
 
     void setWorkHours(double workHours) {
         Employee::workHours = workHours;
+    }
+
+    Employee &operator=(const Employee &obj) {
+        int taskSize = tasks->size();
+        delete [] tasks;
+
+        department = obj.department;
+        bonus = obj.bonus;
+        isActive = obj.isActive;
+        workHours = obj.workHours;
+        GAP = obj.GAP;
+
+        tasks = new vector<Task>();
+
+        for (int i = 0; i < taskSize; i++) {
+            tasks->at(i) = obj.tasks->at(i);
+        }
+
+        return *this;
     }
 };
 

@@ -52,6 +52,14 @@ public:
         this->sex = obj.sex;
         this->TC = obj.TC;
         this->phone = obj.phone;
+         birthDate = obj.birthDate;
+         email= obj.email;
+         address= obj.address;
+        //Account
+         salary = obj.salary;
+         enterDate= obj.enterDate;
+         childNumber= obj.childNumber;
+         dayOffNumber = obj.dayOffNumber;
     }
 
     double generateRandomNumber() {
