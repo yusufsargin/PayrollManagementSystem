@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../../Operations/Operations.cpp"
 #include "../../Models/Employee.cpp"
 #include "../../Models/Task.h"
 
@@ -21,7 +20,7 @@
 using namespace std;
 
 enum EmployeeOperationsTypes {
-    SHOW_MY_INFO,
+    SHOW_EMPLOYEE_INFO,
     SHOW_ASSIGNED_TASKS,
     SHOW_DONE_TASKS,
     SHOW_BONUS_AMOUNT,
@@ -41,7 +40,7 @@ public:
     EmployeeMainScreen() {
         /*this->employee = new Employee("Yusuf", "Sargin", 'M', 123123123, "12321312");*/
         this->employee = getEmployeeValueFromStorage();
-        Task task{"Deneme","19/12/2020","Deneme Tasks",HARD};
+        Task task{"Deneme", "19/12/2020", "Deneme Tasks", HARD};
 
         this->employee->assignNewTaskToEmployee(task);
     }
@@ -60,12 +59,8 @@ public:
         return employee1;
     }
 
-    int displayOperationsValuesAndGetValue() {
-        Operations operations{operationsValue};
-
-        operations.displayOperations("Employee Operations");
-
-        return operations.getInputValue();
+    vector<string> getManagerOperations() {
+        return operationsValue;
     }
 
     void showEmployeeInfo() {

@@ -40,6 +40,50 @@ public:
 
         return returnEmployee;
     }
+
+    Task getTaskById(int id) {
+        Task task;
+
+        for (Employee employee: employeeList) {
+            for (Task taskItem: *employee.getTasks()) {
+                if (taskItem.getId() == id) {
+                    task = taskItem;
+                }
+            }
+        }
+
+        return task;
+    }
+
+    vector<Task> getTeamTasks() {
+        vector<Task> tasks;
+
+        for (Employee employee : employeeList) {
+            for (Task task : *employee.getTasks()) {
+                tasks.push_back(task);
+            }
+        }
+
+        return tasks;
+    }
+
+    bool updateTask(Task task) {
+        vector<Task> taskList;
+
+        for (Employee employee: employeeList) {
+            for (Task taskItem: *employee.getTasks()) {
+                if (taskItem.getId() == task.getId()) {
+                    taskList.push_back(task);
+                }else{
+                    taskList.push_back(taskItem);
+                }
+            }
+
+            employee.setTasks(taskList);
+        }
+
+        return true;
+    }
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_TEAM_CPP

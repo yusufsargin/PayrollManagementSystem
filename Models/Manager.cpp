@@ -19,8 +19,24 @@ public:
 
     }
 
-    Employee getMemberById(int id) {
-        return team.getEmployeeById(id);
+    TaskStatus checkTaskStatus(int id) {
+        return team.getTaskById(id).getTaskStatus();
+    }
+
+    vector<Task> checkTeamTaskList(){
+        return team.getTeamTasks();
+    }
+
+    bool updateTaskDueDate(int taskId, string dueDate){
+        Task task = team.getTaskById(taskId);
+
+        task.setDueDate(dueDate);
+
+        return team.updateTask(task);
+    }
+
+    void showManagerInfo(){
+        this->displayMyInfo();
     }
 };
 

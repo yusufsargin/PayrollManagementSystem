@@ -167,6 +167,12 @@ public:
         return department;
     }
 
+    void setTasks(vector<Task> tasks) {
+        tasks.clear();
+
+        this->tasks = &tasks;
+    }
+
     void setDepartment(Department department) {
         Employee::department = department;
     }
@@ -201,7 +207,7 @@ public:
 
     Employee &operator=(const Employee &obj) {
         int taskSize = tasks->size();
-        delete [] tasks;
+        delete[] tasks;
 
         department = obj.department;
         bonus = obj.bonus;

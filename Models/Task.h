@@ -43,6 +43,16 @@ public:
         this->level = level;
     }
 
+    Task(Task const &obj){
+        this->id = obj.id;
+        this->taskTitle = obj.taskTitle;
+        this->dueDate =obj.dueDate;
+        this->description = obj.description;
+        requirements = obj.requirements;
+        level = obj.level;
+        taskStatus = obj.taskStatus;
+    }
+
     double generateRandomNumber() {
         srand(time(NULL));
 
