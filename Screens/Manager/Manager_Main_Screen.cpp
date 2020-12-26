@@ -24,8 +24,10 @@ class ManagerMainScreen {
                                    "3.Exit"};
     Manager *manager;
     Employee *employeeList;
+    vector<Employee *> *vectorEmployeeList;
 public:
     ManagerMainScreen() {
+        this->vectorEmployeeList = new vector<Employee *>;
         manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
 
         /*employeeList->push_back(Employee("Ddd","12312",'M',12312,"2312312"));*/
@@ -35,13 +37,14 @@ public:
     }
 
     ManagerMainScreen(int employeeSize) {
+        this->vectorEmployeeList = new vector<Employee *>;
         this->employeeList = new Employee[employeeSize];
 
         manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
 
         collectEmployeeList(employeeSize);
 
-        manager->setTeamMembers(employeeList, employeeSize);
+        manager->setTeamMembers(vectorEmployeeList, employeeSize);
     }
 
     ~ManagerMainScreen() {
@@ -63,12 +66,21 @@ public:
 
     void collectEmployeeList(int size) {
         for (int i = 0; i < size; i++) {
-            Task task{"Deneme Taskı", "12/12/2020", "Deneme", HARD};
-            Employee employee{"Deneme", "Deneme", 'M', 123123, "12123123"};
+            /*Task *task = new Task("Deneme Taskı", "12/12/2020", "Deneme", HARD);
+            Employee *employee = new Employee("Deneme", "Deneme", 'M', 123123, "12123123");
 
-            employee.assignNewTaskToEmployee(task);
+            employee->assignNewTaskToEmployee(*task);
 
-            employeeList[i] = employee;
+            employeeList[i] = *employee;
+
+            delete employee;
+            delete task;*/
+            Task *task = new Task("Deneme Taskı", "12/12/2020", "Deneme", HARD);
+            Employee *employee = new Employee("Deneme", "Deneme", 'M', 123123, "12123123");
+
+            employee->assignNewTaskToEmployee(*task);
+
+            this->vectorEmployeeList->push_back(employee);
         }
     }
 

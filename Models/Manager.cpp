@@ -46,8 +46,8 @@ public:
         delete team;
     }
 
-    void setTeamMembers(Employee list[], int listSize) {
-        team->collectTeamMembersFromStorage(list, listSize);
+    void setTeamMembers(vector<Employee *> *list, int listSize) {
+        team->collectTeamMembersFromStorageVector(*list, listSize);
     }
 
     void showTeamMembers() {
@@ -66,52 +66,9 @@ public:
         //team->assignTaskToEmployee(employeeID, task);
     }
 
-    /*void showTeamMembers() {
-        *//*cout << "SHOW" << endl;
-           for (auto i = this->employeeList->cbegin(); i != employeeList->cend(); ++i) {
-               cout<< i->getFirstName() << endl;
-       }*//*
-
-        for (int i = 0; i < employeeListSize; ++i) {
-            employeeList[i].displayMyInfo();
-        }
-    }*/
-
     void showManagerInfo() {
         this->displayMyInfo();
     }
-
-    /* bool assignTaskToTeamMember(int id, Task task) {
-         return team->assignTaskToEmployee(id, task);
-     }
-
-     TaskStatus checkTaskStatus(int id) {
-         return team->getTaskById(id).getTaskStatus();
-     }
-
-     vector<Task> checkTeamTaskList() {
-         return team->getTeamTasks();
-     }
-
-     bool updateTaskDueDate(int taskId, string dueDate) {
-         Task task = team->getTaskById(taskId);
-
-         task.setDueDate(dueDate);
-
-         return team->updateTask(task);
-     }
-
-     void showManagerInfo() {
-         this->displayMyInfo();
-     }
-
-     void showTeamMembers() {
-         cout << "-----------------------" << endl;
-
-         team->showEmployeeInfo();
-
-         cout << "-----------------------" << endl;
-     }*/
 };
 
 

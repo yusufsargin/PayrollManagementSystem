@@ -23,7 +23,7 @@ using namespace std;
 class Employee : public People {
     int GAP = 20;
     Department department;
-    vector<Task> *tasks = nullptr;
+    vector<Task *> *tasks = nullptr;
     Task *taskList = nullptr;
     double bonus;
     bool isActive;
@@ -45,28 +45,27 @@ private:
     }
 
 private:
-    void reDefineTasks(int taskSize) {
-        delete[] taskList;
-
-        taskList = new Task[taskSize];
-    }
-
     void pushNewTask(Task task) {
         taskSize = taskSize + 1;
+        cout << "TASK SIZE " << taskSize << endl;
 
         Task *tempTask = new Task[taskSize];
 
         for (int i = 0; i < taskSize - 1; i++) {
+            cout << "TEDDE" << endl;
             tempTask[i] = taskList[i];
         }
 
-        tempTask[taskSize] = task;
+        tempTask[taskSize - 1] = task;
+
+        cout << task.getDescription() << endl;
 
         delete[] taskList;
         this->taskList = new Task[taskSize];
 
         for (int i = 0; i < taskSize; i++) {
             taskList[i] = tempTask[i];
+            cout << taskList[i].getDescription() << endl;
         }
 
         delete[] tempTask;
@@ -74,24 +73,26 @@ private:
 
 public:
     Employee() : People() {
-        this->tasks = new vector<Task>();
+        this->tasks = new vector<Task *>();
         this->taskList = new Task[0];
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
         this->workHours = 0;
+        this->taskSize = 0;
     }
 
     Employee(string firstName, string lastName, char sex, int TC, string phone)
             : People(firstName, lastName, sex, TC,
                      phone) {
-        this->tasks = new vector<Task>();
+        this->tasks = new vector<Task *>();
         this->taskList = new Task[0];
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
         this->workHours = 0;
         this->GAP = 20;
+        this->taskSize = 0;
     }
 
     ~Employee() {
@@ -112,7 +113,7 @@ public:
         workHours = obj.workHours;
         GAP = obj.GAP;
 
-        tasks = new vector<Task>;
+        tasks = new vector<Task *>;
         taskList = new Task[obj.taskSize];
         this->taskSize = obj.taskSize;
         for (int i = 0; i < obj.taskSize; i++) {
@@ -145,8 +146,8 @@ public:
         bool isExist = false;
         bool assigned = false;
 
-        for (Task taskInfo : *tasks) {
-            if (taskInfo.getId() == task.getId()) {
+        for (Task *taskInfo : *tasks) {
+            if (taskInfo->getId() == task.getId()) {
                 isExist = true;
             }
         }
@@ -158,10 +159,9 @@ public:
         }*/
 
         if (!isExist) {
-            this->tasks->push_back(task);
-            taskSize = taskSize + 1;
-
-            pushNewTask(task);
+            tasks->push_back(new Task(task));
+            cout << tasks->at(0)->getDueDate() << endl;
+            //pushNewTask(task);
             assigned = true;
         }
 
@@ -172,8 +172,8 @@ public:
         bool isUpdate = false;
 
         for (int i = 0; i < tasks->size(); i++) {
-            if (tasks->at(i).getId() == task.getId()) {
-                tasks->at(i) = task;
+            if (tasks->at(i)->getId() == task.getId()) {
+                tasks->at(i) = &task;
                 isUpdate = true;
             }
         }
@@ -192,16 +192,13 @@ public:
              left << setw(GAP) << "Task Description" <<
              left << setw(GAP) << "Task Status"
              << left << setw(GAP) << "Task Diff Level" << endl;
-        if (taskSize > 0) {
-            for (int i = 0; i < taskSize; i++) {
-                cout << left << setw(GAP) << taskList[i].getId();
-                cout << left << setw(GAP) << taskList[i].getTaskTitle();
-                cout << left << setw(GAP) << taskList[i].getDescription();
-                cout << left << setw(GAP) << convertTaskStatusTypes(taskList[i].getTaskStatus());
-                cout << left << setw(GAP) << taskList[i].getLevel() << endl;
-            }
-        } else {
-            cout << "Empty" << endl;
+
+        for (Task *task: *tasks) {
+            cout << left << setw(GAP) << task->getId();
+            cout << left << setw(GAP) << task->getTaskTitle();
+            cout << left << setw(GAP) << task->getDescription();
+            cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
+            cout << left << setw(GAP) << task->getLevel() << endl;
         }
     }
 
@@ -212,13 +209,13 @@ public:
              left << setw(GAP) << "Task Title" <<
              left << setw(GAP) << "Task Description"
              << left << setw(GAP) << "Task Diff Level" << endl;
-        for (Task task:*tasks) {
-            if (task.getTaskStatus() == taskStatus) {
-                cout << left << setw(GAP) << task.getId();
-                cout << left << setw(GAP) << task.getTaskTitle();
-                cout << left << setw(GAP) << task.getDescription();
-                cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
-                cout << left << setw(GAP) << task.getLevel() << endl;
+        for (Task *task:*tasks) {
+            if (task->getTaskStatus() == taskStatus) {
+                cout << left << setw(GAP) << task->getId();
+                cout << left << setw(GAP) << task->getTaskTitle();
+                cout << left << setw(GAP) << task->getDescription();
+                cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
+                cout << left << setw(GAP) << task->getLevel() << endl;
             }
         }
     }
@@ -227,17 +224,11 @@ public:
         return department;
     }
 
-    void setTasks(vector<Task> tasks) {
-        tasks.clear();
-
-        this->tasks = &tasks;
-    }
-
     void setDepartment(Department department) {
         Employee::department = department;
     }
 
-    vector<Task> *getTasks() const {
+    vector<Task *> *getTasks() const {
         return tasks;
     }
 

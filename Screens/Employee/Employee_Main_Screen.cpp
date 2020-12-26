@@ -40,9 +40,11 @@ public:
     EmployeeMainScreen() {
         /*this->employee = new Employee("Yusuf", "Sargin", 'M', 123123123, "12321312");*/
         this->employee = getEmployeeValueFromStorage();
-        Task task{"Deneme", "19/12/2020", "Deneme Tasks", HARD};
+        Task *task = new Task("Deneme", "19/12/2020", "Deneme Tasks", HARD);
 
-        this->employee->assignNewTaskToEmployee(task);
+        this->employee->assignNewTaskToEmployee(*task);
+
+        delete task;
     }
 
     ~EmployeeMainScreen() {
@@ -117,8 +119,8 @@ public:
         }
 
         for (int i = 0; i < employee->getTasks()->size(); i++) {
-            if (employee->getTasks()->at(i).getId() == taskId) {
-                employee->getTasks()->at(i).setTaskStatus(taskStatus);
+            if (employee->getTasks()->at(i)->getId() == taskId) {
+                employee->getTasks()->at(i)->setTaskStatus(taskStatus);
             }
         }
 

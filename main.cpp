@@ -14,7 +14,7 @@ int displayOperationsValuesAndGetValue(Operations operations, string title) {
 
 int main() {
     //EmployeeMainScreen employeeMainScreen;
-    ManagerMainScreen managerMainScreen{2};
+    ManagerMainScreen managerMainScreen{1};
     //Operations *operations = new Operations(employeeMainScreen.getEmployeeOperations());
     Operations *operations = new Operations(managerMainScreen.getManagerOperations());
     bool isRun = true;

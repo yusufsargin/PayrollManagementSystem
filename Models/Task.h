@@ -146,7 +146,19 @@ public:
         Task::level = level;
     }
 
-
+   /* Task &operator=(const Task &obj);*/
 };
+
+/*Task &Task::operator=(const Task &obj) {
+    this->id = obj.id;
+    this->taskTitle = obj.taskTitle;
+    this->dueDate = obj.dueDate;
+    this->description = obj.description;
+    this->requirements = obj.requirements;
+    this->level = obj.level;
+    this->taskStatus = obj.taskStatus;
+
+    return *this;
+}*/
 
 #endif //PAYROLLMANEGEMENTSYSTEM_TASK_H

@@ -12,14 +12,17 @@ using namespace std;
 
 class Team {
     Employee *employeeList;
+    vector<Employee *> *employeeVector;
     int employeeSize = 0;
 public:
 
     Team() {
         this->employeeList = new Employee[employeeSize];
+        this->employeeVector = new vector<Employee *>();
     }
 
     Team(Employee list[], int listSize) {
+        this->employeeVector = new vector<Employee *>();
         collectTeamMembersFromStorage(list, listSize);
     }
 
@@ -40,6 +43,12 @@ public:
         }
     }
 
+    void collectTeamMembersFromStorageVector(vector<Employee *> &list, int employeeSize) {
+        for (Employee *employee:list) {
+            this->employeeVector->push_back(employee);
+        }
+    }
+
     void showMembersInfo() {
         employeeList[0].headerOfInfoTable();
         for (int i = 0; i < employeeSize; i++) {
@@ -48,16 +57,19 @@ public:
     }
 
     void showMembersTaskList() {
-        for (int i = 0; i < employeeSize; i++) {
+        /*for (int i = 0; i < employeeSize; i++) {
             employeeList[i].showExistTasks();
+        }*/
+        for (Employee *employee:*employeeVector) {
+            employee->showExistTasks();
         }
     }
 
     void updateTaskDueDate(int id, string dueDate) {
         for (int i = 0; i < employeeSize; i++) {
             for (int j = 0; j < employeeList[i].getTasks()->size(); i++) {
-                if (employeeList[i].getTasks()->at(j).getId() == id) {
-                    employeeList[i].getTasks()->at(j).setDueDate(dueDate);
+                if (employeeList[i].getTasks()->at(j)->getId() == id) {
+                    employeeList[i].getTasks()->at(j)->setDueDate(dueDate);
                 }
             }
         }
