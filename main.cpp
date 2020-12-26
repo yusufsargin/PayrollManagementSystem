@@ -46,6 +46,9 @@ int main() {
             case SHOW_MANAGER_INFO:
                 managerMainScreen.showManagerInfo();
                 break;
+            case SHOW_MANAGER_TEAM_MEMBERS:
+                managerMainScreen.showTeamMembers();
+                break;
             case EXIT:
                 isRun = false;
                 break;
