@@ -59,7 +59,7 @@ public:
         return employee1;
     }
 
-    vector<string> getManagerOperations() {
+    vector<string> getEmployeeOperations() {
         return operationsValue;
     }
 

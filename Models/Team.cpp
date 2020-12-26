@@ -11,46 +11,62 @@
 using namespace std;
 
 class Team {
-    vector<Employee> *employeeList;
+    Employee *employeeList;
+    int employeeSize = 0;
 public:
-    vector<Employee> getTeamMembers() {
-        vector<Employee> list;
-
-        Employee employee{"Yusuf", "sasdfsdfsrgin", 'M', 12312312, "12313"};
-
-        employee.displayMyInfo();
-        list.push_back(employee);
-
-        return list;
-    }
 
     Team() {
-        Employee employee{"Yusuf", "sasdfsdfsrgin", 'M', 12312312, "12313"};
-        vector<Employee> list{employee};
+        this->employeeList = new Employee[employeeSize];
+    }
 
-        this->employeeList = new vector<Employee>(list);
+    Team(Employee list[], int listSize) {
+        collectTeamMembersFromStorage(list, listSize);
     }
 
     Team(Team const &obj) {
         delete employeeList;
-
-        this->employeeList = new vector<Employee>;
-
-        this->employeeList = obj.employeeList;
     }
 
     ~Team() {
         delete employeeList;
     }
 
-    vector<Employee> getEmployeeList() {
-        return *employeeList;
+    void collectTeamMembersFromStorage(Employee list[], int employeeSize) {
+        this->employeeSize = employeeSize;
+        this->employeeList = new Employee[employeeSize];
+
+        for (int i = 0; i < employeeSize; ++i) {
+            employeeList[i] = list[i];
+        }
     }
 
-    void showEmployeeInfo() {
-        for (Employee employee: *employeeList) {
-            employee.displayMyInfo();
+    void showMembersInfo() {
+        employeeList[0].headerOfInfoTable();
+        for (int i = 0; i < employeeSize; i++) {
+            employeeList[i].displayMyInfo(true);
         }
+    }
+
+    void showMembersTaskList() {
+        for (int i = 0; i < employeeSize; i++) {
+            employeeList[i].showExistTasks();
+        }
+    }
+
+    /* vector<Employee> getEmployeeList() {
+         return *employeeList;
+     }
+
+     void setEmployeeList(vector<Employee> employeeList){
+         this->employeeList = &employeeList;
+     }
+
+     void showEmployeeInfo() {
+         cout << "Show Employee" << endl;
+         cout << employeeList->at(0).getFirstName() << endl;
+         *//*for (Employee employee:*employeeList) {
+            employee.displayMyInfo();
+        }*//*
     }
 
     Employee getEmployeeById(int id) {
@@ -125,7 +141,7 @@ public:
         }
 
         return true;
-    }
+    }*/
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_TEAM_CPP

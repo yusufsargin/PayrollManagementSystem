@@ -14,13 +14,14 @@ int displayOperationsValuesAndGetValue(Operations operations, string title) {
 
 int main() {
     EmployeeMainScreen employeeMainScreen;
-    ManagerMainScreen managerMainScreen;
+    ManagerMainScreen managerMainScreen{2};
+    //Operations *operations = new Operations(employeeMainScreen.getEmployeeOperations());
     Operations *operations = new Operations(managerMainScreen.getManagerOperations());
     bool isRun = true;
 
     while (isRun) {
-        /*switch (employeeMainScreen.displayOperationsValuesAndGetValue()) {
-            case SHOW_MY_INFO:
+        /*switch (displayOperationsValuesAndGetValue(*operations,"Employee Operations")) {
+            case SHOW_EMPLOYEE_INFO:
                 employeeMainScreen.showEmployeeInfo();
                 break;
             case SHOW_ASSIGNED_TASKS:
@@ -41,13 +42,15 @@ int main() {
             default:
                 break;
         }*/
-
         switch (displayOperationsValuesAndGetValue(*operations, "Manager Options")) {
             case SHOW_MANAGER_INFO:
                 managerMainScreen.showManagerInfo();
                 break;
             case SHOW_MANAGER_TEAM_MEMBERS:
-                managerMainScreen.showTeamMembers();
+                managerMainScreen.showManagerTeamMembers();
+                break;
+            case SHOW_MANAGER_TEAM_TASKS:
+                managerMainScreen.showMembersAllTasks();
                 break;
             case EXIT:
                 isRun = false;

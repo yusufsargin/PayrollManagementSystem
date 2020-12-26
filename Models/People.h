@@ -33,7 +33,6 @@ public:
                phone{"000000000"},
                email{""}, salary{0}, enterDate{""}, childNumber{0}, dayOffNumber{0} {
         this->userId = generateRandomNumber();
-        getPassword();
     }
 
     People(string firstName, string lastName, char sex, int TC, string phone) : People() {
@@ -44,7 +43,7 @@ public:
         this->phone = phone;
     }
 
-    People(People &obj) {
+    People(People const &obj) {
         this->userId = obj.userId;
         this->password = obj.password;
         this->firstName = obj.firstName;
@@ -52,14 +51,14 @@ public:
         this->sex = obj.sex;
         this->TC = obj.TC;
         this->phone = obj.phone;
-         birthDate = obj.birthDate;
-         email= obj.email;
-         address= obj.address;
-        //Account
-         salary = obj.salary;
-         enterDate= obj.enterDate;
-         childNumber= obj.childNumber;
-         dayOffNumber = obj.dayOffNumber;
+        this->birthDate = obj.birthDate;
+        this->email = obj.email;
+        this->address = obj.address;
+        // Account
+        this->salary = obj.salary;
+        this->enterDate = obj.enterDate;
+        this->childNumber = obj.childNumber;
+        this->dayOffNumber = obj.dayOffNumber;
     }
 
     double generateRandomNumber() {

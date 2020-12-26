@@ -23,7 +23,7 @@ using namespace std;
 class Employee : public People {
     int GAP = 20;
     Department department;
-    vector<Task> *tasks;
+    vector<Task> *tasks = nullptr;
     double bonus;
     bool isActive;
     double workHours;
@@ -44,21 +44,21 @@ private:
 
 public:
     Employee() : People() {
+        this->tasks = new vector<Task>;
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
         this->workHours = 0;
-        this->tasks = new vector<Task>;
     }
 
     Employee(string firstName, string lastName, char sex, int TC, string phone)
             : People(firstName, lastName, sex, TC,
                      phone) {
+        this->tasks = new vector<Task>;
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
         this->workHours = 0;
-        this->tasks = new vector<Task>();
         this->GAP = 20;
     }
 
@@ -67,28 +67,35 @@ public:
     }
 
     Employee(Employee const &obj) {
-        int taskSize = tasks->size();
-        delete tasks;
-
+        if (this->tasks != nullptr) {
+            delete tasks;
+        }
         department = obj.department;
         bonus = obj.bonus;
         isActive = obj.isActive;
         workHours = obj.workHours;
         GAP = obj.GAP;
 
-        tasks = new vector<Task>();
+        tasks = new vector<Task>;
 
-        for (int i = 0; i < taskSize; i++) {
+        for (int i = 0; i < obj.tasks->size(); i++) {
             tasks->at(i) = obj.tasks->at(i);
         }
     }
 
-    void displayMyInfo() {
+    void headerOfInfoTable(){
+        cout << left << setw(GAP) << "User ID";
         cout << left << setw(GAP) << "First Name";
         cout << left << setw(GAP) << "Last Name";
         cout << left << setw(GAP) << "Sex";
         cout << left << setw(GAP) << "Phone" << endl;
+    }
 
+    void displayMyInfo(bool headerExist=false) {
+        if(!headerExist){
+            headerOfInfoTable();
+        }
+        cout << left << setw(GAP) << getUserId();
         cout << left << setw(GAP) << getFirstName();
         cout << left << setw(GAP) << getLastName();
         cout << left << setw(GAP) << getSex();
@@ -129,19 +136,25 @@ public:
     }
 
     void showExistTasks() {
-        cout << "----Existing Tasks-----" << endl;
+        cout << "----Existing Tasks Of ";
+        cout << getUserId();
+        cout << "------------------" << endl;
 
         cout << left << setw(GAP) << "Task ID" <<
              left << setw(GAP) << "Task Title" <<
              left << setw(GAP) << "Task Description" <<
              left << setw(GAP) << "Task Status"
              << left << setw(GAP) << "Task Diff Level" << endl;
-        for (Task task:*tasks) {
-            cout << left << setw(GAP) << task.getId();
-            cout << left << setw(GAP) << task.getTaskTitle();
-            cout << left << setw(GAP) << task.getDescription();
-            cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
-            cout << left << setw(GAP) << task.getLevel() << endl;
+        if(tasks != nullptr){
+            for (Task task:*tasks) {
+                cout << left << setw(GAP) << task.getId();
+                cout << left << setw(GAP) << task.getTaskTitle();
+                cout << left << setw(GAP) << task.getDescription();
+                cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
+                cout << left << setw(GAP) << task.getLevel() << endl;
+            }
+        }else {
+            cout << "Empty" << endl;
         }
     }
 
@@ -203,25 +216,6 @@ public:
 
     void setWorkHours(double workHours) {
         Employee::workHours = workHours;
-    }
-
-    Employee &operator=(const Employee &obj) {
-        int taskSize = tasks->size();
-        delete[] tasks;
-
-        department = obj.department;
-        bonus = obj.bonus;
-        isActive = obj.isActive;
-        workHours = obj.workHours;
-        GAP = obj.GAP;
-
-        tasks = new vector<Task>();
-
-        for (int i = 0; i < taskSize; i++) {
-            tasks->at(i) = obj.tasks->at(i);
-        }
-
-        return *this;
     }
 };
 

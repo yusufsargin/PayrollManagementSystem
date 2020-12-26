@@ -2,6 +2,15 @@
 // Created by yusuf_sargin on 24.12.2020.
 //
 
+
+/**
++ checkTaskStatus(id:int):Task
++ checkTeamStatus()
++ updateTaskDueDate(id:int,value:string):Task
++ deleteTask(id:int):Task
++ assingTaskToEmployee(Employee,Task)
+ */
+
 #ifndef PAYROLLMANEGEMENTSYSTEM_MANAGER_CPP
 #define PAYROLLMANEGEMENTSYSTEM_MANAGER_CPP
 
@@ -15,56 +24,86 @@
 using namespace std;
 
 class Manager : public Employee {
-    Team *team;
+    Team *team = nullptr;
 public:
     Manager() : Employee() {
-        this->team = new Team();
+        this->team = new Team;
     }
 
     Manager(string firstName, string lastName, char sex, int tc, string phone) : Employee(firstName, lastName, sex, tc,
                                                                                           phone) {
+        this->team = new Team;
     }
 
     Manager(Manager const &obj) {
-        delete team;
-        team = new Team();
+        if (team != nullptr) {
+            delete team;
+        }
+        this->team = new Team;
     }
 
     ~Manager() {
         delete team;
     }
 
-    bool assignTaskToTeamMember(int id, Task task) {
-        return team->assignTaskToEmployee(id,task);
+    void setTeamMembers(Employee list[], int listSize) {
+        team->collectTeamMembersFromStorage(list, listSize);
     }
 
-    TaskStatus checkTaskStatus(int id) {
-        return team->getTaskById(id).getTaskStatus();
+    void showTeamMembers() {
+        team->showMembersInfo();
     }
 
-    vector<Task> checkTeamTaskList() {
-        return team->getTeamTasks();
+    void showAllTasks(){
+        team->showMembersTaskList();
     }
 
-    bool updateTaskDueDate(int taskId, string dueDate) {
-        Task task = team->getTaskById(taskId);
+    /*void showTeamMembers() {
+        *//*cout << "SHOW" << endl;
+           for (auto i = this->employeeList->cbegin(); i != employeeList->cend(); ++i) {
+               cout<< i->getFirstName() << endl;
+       }*//*
 
-        task.setDueDate(dueDate);
-
-        return team->updateTask(task);
-    }
+        for (int i = 0; i < employeeListSize; ++i) {
+            employeeList[i].displayMyInfo();
+        }
+    }*/
 
     void showManagerInfo() {
         this->displayMyInfo();
     }
 
-    void showTeamMembers(){
-        cout << "-----------------------" << endl;
+    /* bool assignTaskToTeamMember(int id, Task task) {
+         return team->assignTaskToEmployee(id, task);
+     }
 
-        team->showEmployeeInfo();
+     TaskStatus checkTaskStatus(int id) {
+         return team->getTaskById(id).getTaskStatus();
+     }
 
-        cout << "-----------------------" << endl;
-    }
+     vector<Task> checkTeamTaskList() {
+         return team->getTeamTasks();
+     }
+
+     bool updateTaskDueDate(int taskId, string dueDate) {
+         Task task = team->getTaskById(taskId);
+
+         task.setDueDate(dueDate);
+
+         return team->updateTask(task);
+     }
+
+     void showManagerInfo() {
+         this->displayMyInfo();
+     }
+
+     void showTeamMembers() {
+         cout << "-----------------------" << endl;
+
+         team->showEmployeeInfo();
+
+         cout << "-----------------------" << endl;
+     }*/
 };
 
 
