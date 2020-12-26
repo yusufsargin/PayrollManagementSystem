@@ -26,22 +26,15 @@ class ManagerMainScreen {
                                    "4.Assign Task To Employee",
                                    "5.Exit"};
     Manager *manager;
-    Employee *employeeList;
     vector<Employee *> *vectorEmployeeList;
 public:
     ManagerMainScreen() {
         this->vectorEmployeeList = new vector<Employee *>;
         manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
-
-        /*employeeList->push_back(Employee("Ddd","12312",'M',12312,"2312312"));*/
-        /* employeeList[0] = Employee("Ddd", "12312", 'M', 12312, "2312312");
-
-         manager->setEmployeeList(employeeList);*/
     }
 
     ManagerMainScreen(int employeeSize) {
         this->vectorEmployeeList = new vector<Employee *>;
-        this->employeeList = new Employee[employeeSize];
 
         manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
 
@@ -52,7 +45,6 @@ public:
 
     ~ManagerMainScreen() {
         delete manager;
-        delete employeeList;
     }
 
     void showManagerInfo() {
@@ -132,42 +124,4 @@ public:
 
         manager->assignTaskToEmployee(employeeID, task);
     }
-
-    /* Manager *getManagerFromStorage() {
-         Manager *fromStorageManager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
-
-         return fromStorageManager;
-     }
-
-     vector<string> getManagerOperations() {
-         return operationsValue;
-     }
-
-     void showInfo(){
-         this->manager->showData();
-     }*/
-
-    /*void showManagerInfo() {
-        manager->showManagerInfo();
-    }
-
-    TaskStatus checkTaskStatus(int id) {
-        return manager->checkTaskStatus(id);
-    }
-
-    vector<Task> checkTeamTaskList() {
-        return manager->checkTeamTaskList();
-    }
-
-    bool updateTaskDueDate(int id, string dueDate) {
-        return manager->updateTaskDueDate(id, dueDate);
-    }
-
-    bool assignTaskToEmployee(int employeeId, Task task) {
-        return manager->assignTaskToTeamMember(employeeId, task);
-    }
-
-    void showTeamMembers() {
-        this->manager->showTeamMembers();
-    }*/
 };
