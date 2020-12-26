@@ -53,10 +53,10 @@ int main() {
                 managerMainScreen.showMembersAllTasks();
                 break;
             case UPDATE_MANGER_TASK_DUE_DATE:
-                //managerMainScreen.updateTaskDueDate();
+                managerMainScreen.updateTaskDueDate();
                 break;
             case ASSIGN_TASK_TO_EMPLOYEE:
-//                managerMainScreen.assignTaskToEmployee();
+                managerMainScreen.assignTaskToEmployee();
                 break;
             case EXIT:
                 isRun = false;

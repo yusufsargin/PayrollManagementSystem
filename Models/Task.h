@@ -79,9 +79,9 @@ public:
         this->taskTitle = obj.taskTitle;
         this->dueDate = obj.dueDate;
         this->description = obj.description;
-        requirements = obj.requirements;
-        level = obj.level;
-        taskStatus = obj.taskStatus;
+        this->requirements = obj.requirements;
+        this->level = obj.level;
+        this->taskStatus = obj.taskStatus;
     }
 
     double generateRandomNumber() {

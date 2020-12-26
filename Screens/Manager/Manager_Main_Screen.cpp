@@ -10,18 +10,21 @@
 using namespace std;
 
 enum ManagerOperationsTypes {
-    SHOW_MANAGER_INFO,
+    SHOW_MANAGER_INFO = 0,
     SHOW_MANAGER_TEAM_MEMBERS,
     SHOW_MANAGER_TEAM_TASKS,
     UPDATE_MANGER_TASK_DUE_DATE,
-    ASSIGN_TASK_TO_EMPLOYEE
+    ASSIGN_TASK_TO_EMPLOYEE,
+    EXIT
 };
 
 class ManagerMainScreen {
     vector<string> operationsValue{"0.Show Manager Info",
                                    "1.Show Manager Team Members Info",
                                    "2.Show Manager Team Members All Tasks Info",
-                                   "3.Exit"};
+                                   "3.Change Task Due Date",
+                                   "4.Assign Task To Employee",
+                                   "5.Exit"};
     Manager *manager;
     Employee *employeeList;
     vector<Employee *> *vectorEmployeeList;
@@ -66,15 +69,6 @@ public:
 
     void collectEmployeeList(int size) {
         for (int i = 0; i < size; i++) {
-            /*Task *task = new Task("Deneme Taskı", "12/12/2020", "Deneme", HARD);
-            Employee *employee = new Employee("Deneme", "Deneme", 'M', 123123, "12123123");
-
-            employee->assignNewTaskToEmployee(*task);
-
-            employeeList[i] = *employee;
-
-            delete employee;
-            delete task;*/
             Task *task = new Task("Deneme Taskı", "12/12/2020", "Deneme", HARD);
             Employee *employee = new Employee("Deneme", "Deneme", 'M', 123123, "12123123");
 
@@ -89,6 +83,7 @@ public:
     }
 
     void updateTaskDueDate() {
+        manager->showAllTasks();
         int taskId = 0;
         string dueDate;
         cout << "Enter Task ID: ";
@@ -99,13 +94,13 @@ public:
         cin >> dueDate;
         cout << endl;
 
-        //manager->updateTaskDueData(taskId, dueDate);
+        manager->updateTaskDueData(taskId, dueDate);
     }
 
-    /*void assignTaskToEmployee() {
+    void assignTaskToEmployee() {
         cout << "You can assign task one of them under the table" << endl;
 
-        //showManagerTeamMembers();
+        showManagerTeamMembers();
 
         int employeeID = 0;
         cout << "Enter Employee ID: ";
@@ -119,11 +114,11 @@ public:
         cout << endl;
 
         cout << "Enter Task Due Date: ";
-        cin >> taskTitle;
+        cin >> dueDate;
         cout << endl;
 
         cout << "Enter Task Description: ";
-        cin >> taskTitle;
+        cin >> description;
         cout << endl;
 
         cout << "Enter Task Level" << endl;
@@ -136,7 +131,7 @@ public:
         Task task{taskTitle, dueDate, description, taskLevel};
 
         manager->assignTaskToEmployee(employeeID, task);
-    }*/
+    }
 
     /* Manager *getManagerFromStorage() {
          Manager *fromStorageManager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");

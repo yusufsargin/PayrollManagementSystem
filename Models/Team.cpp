@@ -50,40 +50,52 @@ public:
     }
 
     void showMembersInfo() {
-        employeeList[0].headerOfInfoTable();
-        for (int i = 0; i < employeeSize; i++) {
-            employeeList[i].displayMyInfo(true);
+        for (Employee *employee:*employeeVector) {
+            employee->displayMyInfo();
         }
     }
 
     void showMembersTaskList() {
-        /*for (int i = 0; i < employeeSize; i++) {
-            employeeList[i].showExistTasks();
-        }*/
         for (Employee *employee:*employeeVector) {
             employee->showExistTasks();
         }
     }
 
     void updateTaskDueDate(int id, string dueDate) {
-        for (int i = 0; i < employeeSize; i++) {
+        /*for (int i = 0; i < employeeSize; i++) {
             for (int j = 0; j < employeeList[i].getTasks()->size(); i++) {
                 if (employeeList[i].getTasks()->at(j)->getId() == id) {
                     employeeList[i].getTasks()->at(j)->setDueDate(dueDate);
                 }
             }
+        }*/
+        for (Employee *employee: *employeeVector) {
+            for (Task *task: *employee->getTasks()) {
+                if (task->getId() == id) {
+                    task->setDueDate(dueDate);
+                }
+            }
         }
+
+        showMembersTaskList();
     }
 
-    /*void assignTaskToEmployee(int employeeID, Task task) {
-        for (int i = 0; i < employeeSize; ++i) {
+    void assignTaskToEmployee(int employeeID, Task task) {
+        /*for (int i = 0; i < employeeSize; ++i) {
             if (employeeList[i].getUserId() == employeeID) {
                 employeeList[i].assignNewTaskToEmployee(task);
 
                 employeeList[i].showExistTasks();
             }
+        }*/
+        for(Employee *employee:*employeeVector){
+            if(employee->getUserId()==employeeID){
+                employee->assignNewTaskToEmployee(task);
+
+                employee->showExistTasks();
+            }
         }
-    }*/
+    }
 
     /* vector<Employee> getEmployeeList() {
          return *employeeList;

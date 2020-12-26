@@ -24,8 +24,7 @@ enum EmployeeOperationsTypes {
     SHOW_ASSIGNED_TASKS,
     SHOW_DONE_TASKS,
     SHOW_BONUS_AMOUNT,
-    UPDATE_TASK_STATUS,
-    EXIT
+    UPDATE_TASK_STATUS
 };
 
 class EmployeeMainScreen {

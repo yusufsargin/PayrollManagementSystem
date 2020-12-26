@@ -44,31 +44,19 @@ private:
         }
     }
 
-private:
-    void pushNewTask(Task task) {
-        taskSize = taskSize + 1;
-        cout << "TASK SIZE " << taskSize << endl;
-
-        Task *tempTask = new Task[taskSize];
-
-        for (int i = 0; i < taskSize - 1; i++) {
-            cout << "TEDDE" << endl;
-            tempTask[i] = taskList[i];
+    string convertTaskLevelTypes(TaskLevels taskLevels) {
+        switch (taskLevels) {
+            case EASY:
+                return "EASY";
+            case MEDIUM:
+                return "MEDIUM";
+            case HARD:
+                return "HARD";
+            case VERY_HARD:
+                return "VERY HARD";
+            default:
+                return "INVALID TYPE";
         }
-
-        tempTask[taskSize - 1] = task;
-
-        cout << task.getDescription() << endl;
-
-        delete[] taskList;
-        this->taskList = new Task[taskSize];
-
-        for (int i = 0; i < taskSize; i++) {
-            taskList[i] = tempTask[i];
-            cout << taskList[i].getDescription() << endl;
-        }
-
-        delete[] tempTask;
     }
 
 public:
@@ -152,16 +140,10 @@ public:
             }
         }
 
-        /*for (int i = 0; i < taskSize; i++) {
-            if (taskList[i].getId() == task.getId()) {
-                isExist = true;
-            }
-        }*/
-
+        cout << "EXISTS: " << isExist << endl;
         if (!isExist) {
             tasks->push_back(new Task(task));
-            cout << tasks->at(0)->getDueDate() << endl;
-            //pushNewTask(task);
+
             assigned = true;
         }
 
@@ -187,18 +169,20 @@ public:
         cout << getUserId();
         cout << "------------------" << endl;
 
-        cout << left << setw(GAP) << "Task ID" <<
-             left << setw(GAP) << "Task Title" <<
-             left << setw(GAP) << "Task Description" <<
-             left << setw(GAP) << "Task Status"
-             << left << setw(GAP) << "Task Diff Level" << endl;
+        cout << left << setw(GAP) << "Task ID";
+        cout << left << setw(GAP) << "Task Title";
+        cout << left << setw(GAP) << "Task Description";
+        cout << left << setw(GAP) << "Task Status";
+        cout << left << setw(GAP) << "Task Due Date";
+        cout << left << setw(GAP) << "Task Diff Level" << endl;
 
         for (Task *task: *tasks) {
             cout << left << setw(GAP) << task->getId();
             cout << left << setw(GAP) << task->getTaskTitle();
             cout << left << setw(GAP) << task->getDescription();
             cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
-            cout << left << setw(GAP) << task->getLevel() << endl;
+            cout << left << setw(GAP) << task->getDueDate();
+            cout << left << setw(GAP) << convertTaskLevelTypes(task->getLevel()) << endl;
         }
     }
 
