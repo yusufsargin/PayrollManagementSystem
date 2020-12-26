@@ -54,8 +54,16 @@ public:
         team->showMembersInfo();
     }
 
-    void showAllTasks(){
+    void showAllTasks() {
         team->showMembersTaskList();
+    }
+
+    void updateTaskDueData(int id, string dueDate) {
+        team->updateTaskDueDate(id, dueDate);
+    }
+
+    void assignTaskToEmployee(int employeeID, Task task) {
+        //team->assignTaskToEmployee(employeeID, task);
     }
 
     /*void showTeamMembers() {

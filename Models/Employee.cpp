@@ -24,9 +24,11 @@ class Employee : public People {
     int GAP = 20;
     Department department;
     vector<Task> *tasks = nullptr;
+    Task *taskList = nullptr;
     double bonus;
     bool isActive;
     double workHours;
+    int taskSize = 0;
 
 private:
     string convertTaskStatusTypes(TaskStatus taskStatus) {
@@ -42,9 +44,38 @@ private:
         }
     }
 
+private:
+    void reDefineTasks(int taskSize) {
+        delete[] taskList;
+
+        taskList = new Task[taskSize];
+    }
+
+    void pushNewTask(Task task) {
+        taskSize = taskSize + 1;
+
+        Task *tempTask = new Task[taskSize];
+
+        for (int i = 0; i < taskSize - 1; i++) {
+            tempTask[i] = taskList[i];
+        }
+
+        tempTask[taskSize] = task;
+
+        delete[] taskList;
+        this->taskList = new Task[taskSize];
+
+        for (int i = 0; i < taskSize; i++) {
+            taskList[i] = tempTask[i];
+        }
+
+        delete[] tempTask;
+    }
+
 public:
     Employee() : People() {
-        this->tasks = new vector<Task>;
+        this->tasks = new vector<Task>();
+        this->taskList = new Task[0];
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
@@ -54,7 +85,8 @@ public:
     Employee(string firstName, string lastName, char sex, int TC, string phone)
             : People(firstName, lastName, sex, TC,
                      phone) {
-        this->tasks = new vector<Task>;
+        this->tasks = new vector<Task>();
+        this->taskList = new Task[0];
         this->department = Intern;
         this->bonus = 0;
         this->isActive = false;
@@ -64,11 +96,15 @@ public:
 
     ~Employee() {
         delete tasks;
+        delete[] taskList;
     }
 
     Employee(Employee const &obj) {
         if (this->tasks != nullptr) {
             delete tasks;
+        }
+        if (taskList != nullptr) {
+            delete[] taskList;
         }
         department = obj.department;
         bonus = obj.bonus;
@@ -77,13 +113,15 @@ public:
         GAP = obj.GAP;
 
         tasks = new vector<Task>;
-
-        for (int i = 0; i < obj.tasks->size(); i++) {
+        taskList = new Task[obj.taskSize];
+        this->taskSize = obj.taskSize;
+        for (int i = 0; i < obj.taskSize; i++) {
             tasks->at(i) = obj.tasks->at(i);
+            taskList[i] = obj.taskList[i];
         }
     }
 
-    void headerOfInfoTable(){
+    void headerOfInfoTable() {
         cout << left << setw(GAP) << "User ID";
         cout << left << setw(GAP) << "First Name";
         cout << left << setw(GAP) << "Last Name";
@@ -91,8 +129,8 @@ public:
         cout << left << setw(GAP) << "Phone" << endl;
     }
 
-    void displayMyInfo(bool headerExist=false) {
-        if(!headerExist){
+    void displayMyInfo(bool headerExist = false) {
+        if (!headerExist) {
             headerOfInfoTable();
         }
         cout << left << setw(GAP) << getUserId();
@@ -105,6 +143,7 @@ public:
 
     bool assignNewTaskToEmployee(Task task) {
         bool isExist = false;
+        bool assigned = false;
 
         for (Task taskInfo : *tasks) {
             if (taskInfo.getId() == task.getId()) {
@@ -112,13 +151,21 @@ public:
             }
         }
 
+        /*for (int i = 0; i < taskSize; i++) {
+            if (taskList[i].getId() == task.getId()) {
+                isExist = true;
+            }
+        }*/
+
         if (!isExist) {
             this->tasks->push_back(task);
+            taskSize = taskSize + 1;
 
-            return true;
+            pushNewTask(task);
+            assigned = true;
         }
 
-        return false;
+        return assigned;
     }
 
     bool editTask(int taskId, Task task) {
@@ -145,15 +192,15 @@ public:
              left << setw(GAP) << "Task Description" <<
              left << setw(GAP) << "Task Status"
              << left << setw(GAP) << "Task Diff Level" << endl;
-        if(tasks != nullptr){
-            for (Task task:*tasks) {
-                cout << left << setw(GAP) << task.getId();
-                cout << left << setw(GAP) << task.getTaskTitle();
-                cout << left << setw(GAP) << task.getDescription();
-                cout << left << setw(GAP) << convertTaskStatusTypes(task.getTaskStatus());
-                cout << left << setw(GAP) << task.getLevel() << endl;
+        if (taskSize > 0) {
+            for (int i = 0; i < taskSize; i++) {
+                cout << left << setw(GAP) << taskList[i].getId();
+                cout << left << setw(GAP) << taskList[i].getTaskTitle();
+                cout << left << setw(GAP) << taskList[i].getDescription();
+                cout << left << setw(GAP) << convertTaskStatusTypes(taskList[i].getTaskStatus());
+                cout << left << setw(GAP) << taskList[i].getLevel() << endl;
             }
-        }else {
+        } else {
             cout << "Empty" << endl;
         }
     }

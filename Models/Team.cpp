@@ -53,6 +53,26 @@ public:
         }
     }
 
+    void updateTaskDueDate(int id, string dueDate) {
+        for (int i = 0; i < employeeSize; i++) {
+            for (int j = 0; j < employeeList[i].getTasks()->size(); i++) {
+                if (employeeList[i].getTasks()->at(j).getId() == id) {
+                    employeeList[i].getTasks()->at(j).setDueDate(dueDate);
+                }
+            }
+        }
+    }
+
+    /*void assignTaskToEmployee(int employeeID, Task task) {
+        for (int i = 0; i < employeeSize; ++i) {
+            if (employeeList[i].getUserId() == employeeID) {
+                employeeList[i].assignNewTaskToEmployee(task);
+
+                employeeList[i].showExistTasks();
+            }
+        }
+    }*/
+
     /* vector<Employee> getEmployeeList() {
          return *employeeList;
      }

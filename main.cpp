@@ -13,7 +13,7 @@ int displayOperationsValuesAndGetValue(Operations operations, string title) {
 }
 
 int main() {
-    EmployeeMainScreen employeeMainScreen;
+    //EmployeeMainScreen employeeMainScreen;
     ManagerMainScreen managerMainScreen{2};
     //Operations *operations = new Operations(employeeMainScreen.getEmployeeOperations());
     Operations *operations = new Operations(managerMainScreen.getManagerOperations());
@@ -51,6 +51,12 @@ int main() {
                 break;
             case SHOW_MANAGER_TEAM_TASKS:
                 managerMainScreen.showMembersAllTasks();
+                break;
+            case UPDATE_MANGER_TASK_DUE_DATE:
+                //managerMainScreen.updateTaskDueDate();
+                break;
+            case ASSIGN_TASK_TO_EMPLOYEE:
+//                managerMainScreen.assignTaskToEmployee();
                 break;
             case EXIT:
                 isRun = false;
