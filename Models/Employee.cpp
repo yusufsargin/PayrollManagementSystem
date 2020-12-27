@@ -140,7 +140,6 @@ public:
             }
         }
 
-        cout << "EXISTS: " << isExist << endl;
         if (!isExist) {
             tasks->push_back(new Task(task));
 
