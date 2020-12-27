@@ -13,7 +13,33 @@ using namespace std;
 
 class Storage {
     vector<Employee *> *employeeList;
+    vector<Task *> *tasks;
 public:
+    Storage() {
+        this->employeeList = new vector<Employee *>();
+        this->tasks = new vector<Task *>;
+    }
+
+    ~Storage() {
+        delete employeeList;
+        delete tasks;
+    }
+
+    Storage(Storage const &obj) {
+        delete employeeList;
+        delete tasks;
+
+        this->employeeList = new vector<Employee *>;
+        for (Employee *employee:*obj.employeeList) {
+            this->employeeList->push_back(employee);
+        }
+
+        this->tasks = new vector<Task *>;
+        for (Task *task:*obj.tasks) {
+            this->tasks->push_back(task);
+        }
+    }
+
     vector<Employee *> *getEmployeeList() {
 
         return employeeList;
@@ -47,8 +73,7 @@ public:
         }
     }
 
-    void getTasks() {
-        vector<Task *> *tasks = new vector<Task *>();
+    vector<Task *> *getTasks() {
         vector<int> taskIds{};
         vector<string> taskTitles{};
         vector<string> taskDueDates{};
@@ -83,8 +108,8 @@ public:
         readWordTask.close();
 
         for (int i = 0; i < taskIds.size(); i++) {
-            tasks->push_back(new Task(taskIds.at(i), taskTitles.at(i), taskDueDates.at(i), taskDescriptions.at(i),
-                                      taskLevels.at(i)));
+            this->tasks->push_back(new Task(taskIds.at(i), taskTitles.at(i), taskDueDates.at(i), taskDescriptions.at(i),
+                                            taskLevels.at(i)));
         }
 
         for (Task *task:*tasks) {
@@ -96,7 +121,7 @@ public:
             cout << task->getTaskStatus() << endl;
         }
 
-        delete tasks;
+        return tasks;
     }
 
     SCREEN auth() {
