@@ -121,7 +121,7 @@ public:
         cout << "3.VERY_HARD" << endl;
         cin >> taskLevel;
 
-        Task task{taskTitle, dueDate, description, taskLevel};
+        Task task{100,taskTitle, dueDate, description, taskLevel};
 
         manager->assignTaskToEmployee(employeeID, task);
     }

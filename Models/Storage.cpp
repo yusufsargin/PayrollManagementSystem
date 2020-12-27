@@ -49,14 +49,15 @@ public:
 
     void getTasks() {
         vector<Task *> *tasks = new vector<Task *>();
-        vector<string> taskIds{};
+        vector<int> taskIds{};
         vector<string> taskTitles{};
         vector<string> taskDueDates{};
         vector<string> taskDescriptions{};
         vector<TaskLevels> taskLevels{};
         vector<TaskStatus> taskStatus{};
 
-        string taskTitle, dueDate, description, requirment, taskId;
+        string taskTitle, dueDate, description, requirment;
+        int taskId;
         int level;
         int status;
         string line;
