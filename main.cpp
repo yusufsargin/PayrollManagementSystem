@@ -1,18 +1,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Models/Storage.cpp"
 #include "Screens/Manager/Manager_Main_Screen.cpp"
 #include "./Operations/Operations.cpp"
 #include "Screens/Employee/Employee_Main_Screen.cpp"
 
 using namespace std;
 
-enum SCREEN {
-    EMPLOYEE_SCREEN = 0,
-    MANAGER_SCREEN,
-    HR_SCREEN,
-    IN_VALID_SCREEN
-};
 
 int displayOperationsValuesAndGetValue(Operations operations, string title) {
     operations.displayOperations(title);
@@ -129,6 +124,9 @@ SCREEN auth() {
 }
 
 int main() {
+    Storage storage;
+
+    storage.getTasks();
     EmployeeMainScreen *employeeMainScreen = nullptr;
     ManagerMainScreen *managerMainScreen = nullptr;
     Operations *operations = nullptr;

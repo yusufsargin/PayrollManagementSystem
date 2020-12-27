@@ -3,9 +3,13 @@
 //
 
 #include <vector>
+#include <iostream>
 #include <fstream>
+#include "Task.h"
 #include "Employee.cpp"
 #include "ScreenType.h"
+
+using namespace std;
 
 class Storage {
     vector<Employee *> *employeeList;
@@ -15,8 +19,83 @@ public:
         return employeeList;
     }
 
-    vector<Task *> getTasks() {
+    TaskStatus convertTaskStatusTypes(int taskStatus) {
+        switch (taskStatus) {
+            case 0:
+                return WAITING;
+            case 1:
+                return IN_PROGRESS;
+            case 2:
+                return DONE;
+            default:
+                return IN_VALID_STATUS;
+        }
+    }
 
+    TaskLevels convertTaskLevelTypes(int taskLevels) {
+        switch (taskLevels) {
+            case 0:
+                return EASY;
+            case 1:
+                return MEDIUM;
+            case 2:
+                return HARD;
+            case 3:
+                return VERY_HARD;
+            default:
+                return IN_VALID_LEVEL;
+        }
+    }
+
+    void getTasks() {
+        vector<Task *> *tasks = new vector<Task *>();
+        vector<string> taskIds{};
+        vector<string> taskTitles{};
+        vector<string> taskDueDates{};
+        vector<string> taskDescriptions{};
+        vector<TaskLevels> taskLevels{};
+        vector<TaskStatus> taskStatus{};
+
+        string taskTitle, dueDate, description, requirment, taskId;
+        int level;
+        int status;
+        string line;
+        ifstream readWordTask("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Tasks.txt");
+
+        while (getline(readWordTask, line) && !readWordTask.eof()) {
+            readWordTask >> taskId;
+            readWordTask >> taskTitle;
+            readWordTask >> dueDate;
+            readWordTask >> description;
+            readWordTask >> requirment;
+            readWordTask >> level;
+            readWordTask >> status;
+
+            taskIds.push_back(taskId);
+            taskTitles.push_back(taskTitle);
+            taskDueDates.push_back(dueDate);
+            taskLevels.push_back(convertTaskLevelTypes(level));
+            taskStatus.push_back(convertTaskStatusTypes(status));
+            taskDescriptions.push_back(description);
+        }
+
+        readWordTask.close();
+
+        for (int i = 0; i < taskIds.size(); i++) {
+            tasks->push_back(new Task(taskIds.at(i), taskTitles.at(i), taskDueDates.at(i), taskDescriptions.at(i),
+                                      taskLevels.at(i)));
+        }
+
+        for (Task *task:*tasks) {
+            cout << "ID:" << task->getId() << endl;
+            cout << task->getTaskTitle() << endl;
+            cout << task->getDescription() << endl;
+            cout << task->getDueDate() << endl;
+            cout << task->getLevel() << endl;
+            cout << task->getTaskStatus() << endl;
+        }
+
+        delete tasks;
     }
 
     SCREEN auth() {
@@ -73,7 +152,7 @@ public:
 
         }
 
-        cout << "SCREEEEEEEN " <<screen << endl;
+        cout << "SCREEEEEEEN " << screen << endl;
         return screen;
     }
 };

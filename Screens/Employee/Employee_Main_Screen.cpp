@@ -39,7 +39,7 @@ class EmployeeMainScreen {
 public:
     EmployeeMainScreen() {
         this->employee = getEmployeeValueFromStorage();
-        Task *task = new Task("Deneme", "19/12/2020", "Deneme Tasks", HARD);
+        Task *task = new Task(100,"Deneme", "19/12/2020", "Deneme Tasks", HARD);
 
         this->employee->assignNewTaskToEmployee(*task);
 

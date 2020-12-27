@@ -14,13 +14,15 @@ enum TaskLevels {
     EASY,
     MEDIUM,
     HARD,
-    VERY_HARD
+    VERY_HARD,
+    IN_VALID_LEVEL
 };
 
 enum TaskStatus {
     WAITING,
     IN_PROGRESS,
-    DONE
+    DONE,
+    IN_VALID_STATUS
 };
 
 class Task {
@@ -40,17 +42,18 @@ public:
     }
 
     Task() : id{0}, taskTitle{""}, dueDate{""}, description{""}, requirements{""}, level{EASY}, taskStatus{WAITING} {
-        id = generateRandomNumber();
     }
 
-    Task(string taskTitle, string dueDate, string description, TaskLevels level) : Task() {
+    Task(int id, string taskTitle, string dueDate, string description, TaskLevels level) : Task() {
+        this->id = id;
         this->taskTitle = taskTitle;
         this->dueDate = dueDate;
         this->description = description;
         this->level = level;
     }
 
-    Task(string taskTitle, string dueDate, string description, int level) : Task() {
+    Task(int id, string taskTitle, string dueDate, string description, int level) : Task() {
+        this->id = id;
         this->taskTitle = taskTitle;
         this->dueDate = dueDate;
         this->description = description;
@@ -146,7 +149,7 @@ public:
         Task::level = level;
     }
 
-   /* Task &operator=(const Task &obj);*/
+    /* Task &operator=(const Task &obj);*/
 };
 
 /*Task &Task::operator=(const Task &obj) {
