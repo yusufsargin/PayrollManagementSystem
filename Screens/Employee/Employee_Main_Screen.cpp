@@ -87,6 +87,8 @@ public:
     }
 
     void updateTaskStatus() {
+        employee->showExistTasks();
+
         int taskId = 0;
         int status = 0;
         TaskStatus taskStatus;

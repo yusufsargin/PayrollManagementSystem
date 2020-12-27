@@ -24,9 +24,9 @@ private:
     string email;
     string address;
     //Account
-    double salary;
     int childNumber;
 protected:
+    double salary;
     string enterDate;
     int dayOffNumber;
 
@@ -154,9 +154,7 @@ public:
         this->address = address;
     }
 
-    double getSalary() const {
-        return salary;
-    }
+    virtual double getSalary() = 0;
 
     void setSalary(double salary) {
         this->salary = salary;

@@ -24,7 +24,7 @@ class Employee : public People {
     bool isActive;
     double workHours;
     int taskSize = 0;
-    Account *account= nullptr;
+    Account *account = nullptr;
 private:
     string convertTaskStatusTypes(TaskStatus taskStatus) {
         switch (taskStatus) {
@@ -38,6 +38,7 @@ private:
                 return "INVALID TYPE";
         }
     }
+
     //ACCOUNT CREATE
     string convertTaskLevelTypes(TaskLevels taskLevels) {
         switch (taskLevels) {
@@ -188,12 +189,15 @@ public:
     }
 
     void showAccordingToStatus(TaskStatus taskStatus) {
-        cout << "----Existing Tasks-----" << endl;
+        cout << "----Existing Tasks Of ";
+        cout << getUserId();
+        cout << "------------------" << endl;
 
-        cout << left << setw(GAP) << "Task ID" <<
-             left << setw(GAP) << "Task Title" <<
-             left << setw(GAP) << "Task Description"
-             << left << setw(GAP) << "Task Diff Level" << endl;
+        cout << left << setw(GAP) << "Task ID";
+        cout << left << setw(GAP) << "Task Title";
+        cout << left << setw(GAP) << "Task Description";
+        cout << left << setw(GAP) << "Task Status";
+        cout << left << setw(GAP) << "Task Diff Level" << endl;
         for (Task *task:*tasks) {
             if (task->getTaskStatus() == taskStatus) {
                 cout << left << setw(GAP) << task->getId();
@@ -217,12 +221,18 @@ public:
         return tasks;
     }
 
-    double getBonus() const {
+    double getBonus() {
+        this->bonus = account->calcBonus(*tasks);
         return bonus;
     }
 
     void setBonus(double bonus) {
         Employee::bonus = bonus;
+    }
+
+    double getSalary() override {
+        this->salary = account->calcSalary(department, workHours, bonus);
+        return salary;
     }
 
     bool isActive1() const {
