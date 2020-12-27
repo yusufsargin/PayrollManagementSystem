@@ -10,21 +10,22 @@
 using namespace std;
 
 enum ManagerOperationsTypes {
-    SHOW_MANAGER_INFO = 0,
+    EXIT = 0,
+    SHOW_MANAGER_INFO = 1,
     SHOW_MANAGER_TEAM_MEMBERS,
     SHOW_MANAGER_TEAM_TASKS,
     UPDATE_MANGER_TASK_DUE_DATE,
     ASSIGN_TASK_TO_EMPLOYEE,
-    EXIT
 };
 
 class ManagerMainScreen {
-    vector<string> operationsValue{"0.Show Manager Info",
-                                   "1.Show Manager Team Members Info",
-                                   "2.Show Manager Team Members All Tasks Info",
-                                   "3.Change Task Due Date",
-                                   "4.Assign Task To Employee",
-                                   "5.Exit"};
+    vector<string> operationsValue{
+            "0.EXIT",
+            "1.Show Manager Info",
+            "2.Show Manager Team Members Info",
+            "3.Show Manager Team Members All Tasks Info",
+            "4.Change Task Due Date",
+            "5.Assign Task To Employee"};
     Manager *manager;
     vector<Employee *> *vectorEmployeeList;
 public:

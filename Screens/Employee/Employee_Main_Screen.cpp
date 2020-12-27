@@ -20,7 +20,7 @@
 using namespace std;
 
 enum EmployeeOperationsTypes {
-    SHOW_EMPLOYEE_INFO,
+    SHOW_EMPLOYEE_INFO = 1,
     SHOW_ASSIGNED_TASKS,
     SHOW_DONE_TASKS,
     SHOW_BONUS_AMOUNT,
@@ -28,16 +28,16 @@ enum EmployeeOperationsTypes {
 };
 
 class EmployeeMainScreen {
-    vector<string> operationsValue{"0.Show My Info",
-                                   "1.Show Assigned Tasks",
-                                   "2.Show Done Tasks",
-                                   "3.Show Bonus Amount",
-                                   "4.Update Task Status",
-                                   "5.Exit"};
+    vector<string> operationsValue{
+            "0.Exit",
+            "1.Show My Info",
+            "2.Show Assigned Tasks",
+            "3.Show Done Tasks",
+            "4.Show Bonus Amount",
+            "5.Update Task Status"};
     Employee *employee;
 public:
     EmployeeMainScreen() {
-        /*this->employee = new Employee("Yusuf", "Sargin", 'M', 123123123, "12321312");*/
         this->employee = getEmployeeValueFromStorage();
         Task *task = new Task("Deneme", "19/12/2020", "Deneme Tasks", HARD);
 
