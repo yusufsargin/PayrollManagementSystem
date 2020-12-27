@@ -1,47 +1,39 @@
-//
-// Created by YUSUF on 27.12.2020.
-//
-
 #ifndef PAYROLLMANEGEMENTSYSTEM_ACCOUNT_CPP
 #define PAYROLLMANEGEMENTSYSTEM_ACCOUNT_CPP
 
-#include <string>
 #include <vector>
-#include "Task.h"
-#include "Departmans.h"
-#include <chrono>
-#include <ctime>
+/*#include <chrono>
+#include <ctime>*/
+#include "Employee.cpp"
 
-using namespace std;
-
-typedef std::chrono::system_clock Clock;
+//typedef std::chrono::system_clock Clock;
 
 class Account {
+private:
     double balance;
-    double dayOffsStuff;
 public:
     Account() {
         this->balance = 0;
-        this->dayOffsStuff = 0;
     }
 
     Account(Account const &obj) {
         balance = obj.balance;
-        dayOffsStuff = obj.dayOffsStuff;
     }
 
     ~Account() {
     }
 
-    double calcBonus(vector<Task *> tasks)//tasklardan gelen bonuslar
+    /*double calcBonus(Employee *emp)//tasklardan gelen bonuslar
     {
         int k;
         double bonus = 0.0, easy = 10, medium = 15, hard = 20, very_hard = 25;
+        vector<Task *> *tasks;
         int taskStatus;
-        for (k = 0; k < tasks.capacity(); k++) {
-            taskStatus = tasks.at(k)->getTaskStatus();
+        tasks = emp->getTasks();
+        for (k = 0; k < tasks->capacity(); k++) {
+            taskStatus = tasks->at(k)->getTaskStatus();
             if (taskStatus == DONE) {
-                switch (tasks.at(k)->getLevel()) {
+                switch (tasks->at(k)->getLevel()) {
                     case EASY:
                         bonus += easy;
                         break;
@@ -59,67 +51,64 @@ public:
                 }
             }
         }
-        //employee.setBonus(bonus);
-        return bonus;
-    }
+        emp->setBonus(bonus);
+    }*/
 
-    double calcSalary(Department department, double workHours, double bonus)//toplam ay sonu ödenecek maaş
+    /*double calcSalary(Employee &emp)//toplam ay sonu ödenecek maaş
     {
-        double hours = workHours, sal = 0.0, soft = 35, hr = 25, salman = 20, inter = 10;
-
+        double hours = emp.getWorkHours(), sal = 0.0, soft = 35, hr = 25, salman = 20, inter = 10;
+        int department = emp.getDepartment();
         switch (department) {
-            case Software_Engineer:
-                sal = soft * workHours;
+            case 0:
+                sal = soft * emp.getWorkHours();
                 break;
-            case Human_Resources:
-                sal = hr * workHours;
+            case 1:
+                sal = hr * emp.getWorkHours();
                 break;
-            case Sales_Manager:
-                sal = salman * workHours;
+            case 2:
+                sal = salman * emp.getWorkHours();
                 break;
-            case Intern:
-                sal = inter * workHours;
+            case 3:
+                sal = inter * emp.getWorkHours();
                 break;
             default:
                 break;
         }
-        sal = bonus;
-        //emp.setBonus(0);
-        this->balance = sal;
-        return sal;
-    }
+        sal = emp.getBonus();
+        emp.setBonus(0);
+        balance = sal;
+    }*/
 
-    double calcDayoffs(double workHours, Department department, int dayOffNumber)//tatil günleri ve kesilecek para
+    /*double calcDayoffs(Employee &emp)//tatil günleri ve kesilecek para
     {
-        double hours = workHours, sal = 0.0, soft = 35, hr = 25, salman = 20, inter = 10;
-
+        double hours = emp.getWorkHours(), sal = 0.0, soft = 35, hr = 25, salman = 20, inter = 10;
+        int department = emp.getDepartment();
         switch (department) {
-            case Software_Engineer:
-                sal -= soft * dayOffNumber * 8;
+            case 0:
+                sal -= soft * emp.getDayOffNumber() * 8;
                 break;
-            case Human_Resources:
-                sal = hr * dayOffNumber * 8;
+            case 1:
+                sal = hr * emp.getDayOffNumber() * 8;
                 break;
-            case Sales_Manager:
-                sal = salman * dayOffNumber * 8;
+            case 2:
+                sal = salman * emp.getDayOffNumber() * 8;
                 break;
-            case Intern:
-                sal = inter * dayOffNumber * 8;
+            case 3:
+                sal = inter * emp.getDayOffNumber() * 8;
                 break;
             default:
                 break;
         }
-        /*emp.setDayOffNumber(0);*/
-        dayOffsStuff = sal;
-    }
+        emp.setDayOffNumber(0);
+    }*/
 
-    double calcCompensation(string enterDate)//tazminat
+    /*double calcCompensation(Employee &emp)//tazminat
     {
         auto now = Clock::now();
         std::time_t now_c = Clock::to_time_t(now);
-        struct tm *parts = localtime(&now_c);
+        struct tm *parts = std::localtime(&now_c);
 
-        string yearStr = enterDate;
+        string yearStr = emp.getEnterDate();
         int enterYear = 0, currentYear, k = 0, i, worked;
         double comp = 0, five = 5, ten = 10, twenty = 20, thirty = 30;
 
@@ -142,8 +131,7 @@ public:
             comp += (worked - 20) * thirty;
         }
 
-        return comp;
-    }
+    }*/
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_ACCOUNT_CPP

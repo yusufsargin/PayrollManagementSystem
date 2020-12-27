@@ -25,9 +25,11 @@ private:
     string address;
     //Account
     double salary;
-    string enterDate;
     int childNumber;
+protected:
+    string enterDate;
     int dayOffNumber;
+
 public:
     People() : password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
                phone{"000000000"},

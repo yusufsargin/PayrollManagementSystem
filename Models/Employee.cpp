@@ -10,13 +10,8 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-
-enum Department {
-    Software_Engineer,
-    Human_Resources,
-    Sales_Manager,
-    Intern
-};
+#include "Account.h"
+#include "Departmans.h"
 
 using namespace std;
 
@@ -29,7 +24,7 @@ class Employee : public People {
     bool isActive;
     double workHours;
     int taskSize = 0;
-
+    Account *account= nullptr;
 private:
     string convertTaskStatusTypes(TaskStatus taskStatus) {
         switch (taskStatus) {
@@ -43,7 +38,7 @@ private:
                 return "INVALID TYPE";
         }
     }
-
+    //ACCOUNT CREATE
     string convertTaskLevelTypes(TaskLevels taskLevels) {
         switch (taskLevels) {
             case EASY:
@@ -68,6 +63,7 @@ public:
         this->isActive = false;
         this->workHours = 0;
         this->taskSize = 0;
+        this->account = new Account;
     }
 
     Employee(string firstName, string lastName, char sex, int TC, string phone)
@@ -81,11 +77,13 @@ public:
         this->workHours = 0;
         this->GAP = 20;
         this->taskSize = 0;
+        this->account = new Account;
     }
 
     ~Employee() {
         delete tasks;
         delete[] taskList;
+        delete account;
     }
 
     Employee(Employee const &obj) {
@@ -95,12 +93,16 @@ public:
         if (taskList != nullptr) {
             delete[] taskList;
         }
+        if (account != nullptr) {
+            delete account;
+        }
         department = obj.department;
         bonus = obj.bonus;
         isActive = obj.isActive;
         workHours = obj.workHours;
         GAP = obj.GAP;
 
+        this->account = obj.account;
         tasks = new vector<Task *>;
         taskList = new Task[obj.taskSize];
         this->taskSize = obj.taskSize;
