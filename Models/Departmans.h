@@ -6,7 +6,7 @@
 #define PAYROLLMANEGEMENTSYSTEM_DEPARTMANS_H
 
 enum Department {
-    Software_Engineer,
+    Software_Engineer = 0,
     Human_Resources,
     Sales_Manager,
     Intern
