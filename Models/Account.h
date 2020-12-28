@@ -17,15 +17,24 @@ using namespace std;
 typedef std::chrono::system_clock Clock;
 
 class Account {
+    int id;
     double balance;
     double dayOffsStuff;
 public:
     Account() {
+        this->id = 0;
         this->balance = 0;
         this->dayOffsStuff = 0;
     }
 
+    Account(int id, double balance, double dayoffsStuff) {
+        this->id = id;
+        this->balance = balance;
+        this->dayOffsStuff = dayoffsStuff;
+    }
+
     Account(Account const &obj) {
+        id = obj.id;
         balance = obj.balance;
         dayOffsStuff = obj.dayOffsStuff;
     }
@@ -143,6 +152,30 @@ public:
         }
 
         return comp;
+    }
+
+    int getId() const {
+        return id;
+    }
+
+    void setId(int id) {
+        Account::id = id;
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+
+    void setBalance(double balance) {
+        Account::balance = balance;
+    }
+
+    double getDayOffsStuff() const {
+        return dayOffsStuff;
+    }
+
+    void setDayOffsStuff(double dayOffsStuff) {
+        Account::dayOffsStuff = dayOffsStuff;
     }
 };
 

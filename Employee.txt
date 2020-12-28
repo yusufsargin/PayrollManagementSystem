@@ -1,7 +1,7 @@
 userID    Department	Tasks	bonus	isActive    stuff	sigorta	 workHours
 0001			    0    1   	300	    1			200	    40
 0002				0	1			200	 40
-0003				100	1			200	 40
+0003				1   001			200	 40
 0004				0	1			200	 40
 0005				0	1			200	 40
 0006				0	1			200	 40

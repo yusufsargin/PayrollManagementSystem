@@ -8,26 +8,31 @@
 #include "Task.h"
 #include "Employee.cpp"
 #include "ScreenType.h"
+#include "Account.h"
 
 using namespace std;
 
 class Storage {
     vector<Employee *> *employeeList;
     vector<Task *> *tasks;
+    vector<Account *> *accounts;
 public:
     Storage() {
         this->employeeList = new vector<Employee *>();
         this->tasks = new vector<Task *>;
+        this->accounts = new vector<Account *>;
     }
 
     ~Storage() {
         delete employeeList;
         delete tasks;
+        delete accounts;
     }
 
     Storage(Storage const &obj) {
         delete employeeList;
         delete tasks;
+        delete accounts;
 
         this->employeeList = new vector<Employee *>;
         for (Employee *employee:*obj.employeeList) {
@@ -37,6 +42,11 @@ public:
         this->tasks = new vector<Task *>;
         for (Task *task:*obj.tasks) {
             this->tasks->push_back(task);
+        }
+
+        this->accounts = new vector<Account *>;
+        for (Account *acc:*accounts) {
+            this->accounts->push_back(acc);
         }
     }
 
@@ -122,6 +132,44 @@ public:
         }
 
         return tasks;
+    }
+
+    //for Account
+    vector<Account *> *getAccounts() {
+        vector<int> accountIds{}; //sanırım bizim yazdığımız yerde yok ama olması gerek
+        vector<double> accountBalances{};
+        vector<double> accountDayOffsStuffs{};
+
+        double balance, dayOffsStuff;
+        int accountId;
+        string line;
+        ifstream readWordAccount("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Account.txt");
+
+        while (getline(readWordAccount, line) && !readWordAccount.eof()) {
+            readWordAccount >> accountId;
+            readWordAccount >> balance;
+            readWordAccount >> dayOffsStuff;
+
+
+            accountIds.push_back(accountId);
+            accountBalances.push_back(balance);
+            accountDayOffsStuffs.push_back(dayOffsStuff);
+
+        }
+
+        readWordAccount.close();
+
+        for (int i = 0; i < accountIds.size(); i++) {
+            this->accounts->push_back(new Account(accountIds.at(i), accountBalances.at(i), accountDayOffsStuffs.at(i)));
+        }
+
+        for (Account *account:*accounts) {
+            cout << "Account ID: " << account->getId() << endl;
+            cout << "Balance: " << account->getBalance() << endl;
+            cout << "DayOffs Stuff: " << account->getDayOffsStuff() << endl;
+        }
+
+        return accounts;
     }
 
     SCREEN auth() {
