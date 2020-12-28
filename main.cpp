@@ -67,7 +67,7 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
 }
 
 void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun) {
-    switch (displayOperationsValuesAndGetValue(*operations, "Manager Options")) {
+    switch (displayOperationsValuesAndGetValue(*operations, "´Human Resources Options")) {
         case ADD_NEW_EMPLOYEE:
             humanResourcesMainScreen->addNewEmployee();
             break;
@@ -131,7 +131,8 @@ int main() {
                 ManagerOperations(operations, managerMainScreen, isRun);
                 break;
             case HR_SCREEN:
-
+                HumanResourcesOperations(operations, humanResourcesMainScreen, isRun);
+                break;
             default:
                 break;
         }
