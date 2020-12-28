@@ -12,7 +12,8 @@ using namespace std;
 enum HumanResourcesOperationsTypes {
     ADD_NEW_EMPLOYEE = 1,
     REMOVE_EXIST_EMPLOYEE,
-    SET_HOLIDAYS,
+    UPDATE_EMPLOYEE,
+    CHECK_SALARY,
     DETECT_HOLIDAYS
 };
 
@@ -34,11 +35,11 @@ public:
     }
 
 
-    void detectHolidays(int userID) {
+    void detectHolidays() {
 
     }
 
-    void addNewEmployee(int userId,) {
+    void addNewEmployee() {
 
     }
 
@@ -50,7 +51,19 @@ public:
 
     }
 
-    void deleteEmployee(int userId) {
+    void deleteEmployee() {
 
+    }
+
+    vector<string> getHROperations() {
+        return operationsValue;
+    }
+
+    vector<Employee *> *getEmployeeList() const {
+        return employeeList;
+    }
+
+    void setEmployeeList(vector<Employee *> *employeeList) {
+        HumanResourcesMainScreen::employeeList = employeeList;
     }
 };

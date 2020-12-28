@@ -5,6 +5,7 @@
 #include "Screens/Manager/Manager_Main_Screen.cpp"
 #include "./Operations/Operations.cpp"
 #include "Screens/Employee/Employee_Main_Screen.cpp"
+#include "Screens/HumanResources/HumanResources_Main_Screen.cpp"
 
 using namespace std;
 
@@ -65,12 +66,39 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
     }
 }
 
+void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun) {
+    switch (displayOperationsValuesAndGetValue(*operations, "Manager Options")) {
+        case ADD_NEW_EMPLOYEE:
+            humanResourcesMainScreen->addNewEmployee();
+            break;
+        case DETECT_HOLIDAYS:
+            humanResourcesMainScreen->detectHolidays();
+            break;
+        case REMOVE_EXIST_EMPLOYEE:
+            humanResourcesMainScreen->deleteEmployee();
+            break;
+        case UPDATE_EMPLOYEE:
+            humanResourcesMainScreen->updateEmployee();
+            break;
+        case CHECK_SALARY:
+            humanResourcesMainScreen->checkSalary();
+            break;
+        case EXIT:
+            isRun = false;
+            break;
+        default:
+            break;
+    }
+}
+
 int main() {
     Storage storage;
 
     storage.getTasks();
     EmployeeMainScreen *employeeMainScreen = nullptr;
     ManagerMainScreen *managerMainScreen = nullptr;
+    HumanResourcesMainScreen *humanResourcesMainScreen = nullptr;
+
     Operations *operations = nullptr;
     bool isRun = true;
     SCREEN screen = storage.auth();
@@ -87,6 +115,9 @@ int main() {
     } else if (screen == MANAGER_SCREEN) {
         managerMainScreen = new ManagerMainScreen(1);
         operations = new Operations(managerMainScreen->getManagerOperations());
+    } else if (screen == HR_SCREEN) {
+        humanResourcesMainScreen = new HumanResourcesMainScreen();
+        operations = new Operations(humanResourcesMainScreen->getHROperations());
     } else if (screen == IN_VALID_SCREEN) {
         isRun = false;
     }
@@ -99,6 +130,8 @@ int main() {
             case MANAGER_SCREEN:
                 ManagerOperations(operations, managerMainScreen, isRun);
                 break;
+            case HR_SCREEN:
+
             default:
                 break;
         }
