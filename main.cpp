@@ -186,6 +186,7 @@ int main() {
     delete managerMainScreen;
     delete employeeMainScreen;
     delete operations;
+    delete humanResourcesMainScreen;
 
     return 0;
 }
