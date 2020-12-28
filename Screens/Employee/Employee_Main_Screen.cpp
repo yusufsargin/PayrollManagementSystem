@@ -39,7 +39,7 @@ class EmployeeMainScreen {
 public:
     EmployeeMainScreen() {
         this->employee = getEmployeeValueFromStorage();
-        Task *task = new Task(100,"Deneme", "19/12/2020", "Deneme Tasks", HARD);
+        Task *task = new Task(100, "Deneme", "19/12/2020", "Deneme Tasks", HARD);
 
         this->employee->assignNewTaskToEmployee(*task);
 
@@ -53,9 +53,8 @@ public:
     Employee *getEmployeeValueFromStorage() {
         //Buradaki değerler file dan alınan değerler ile değiştirilecek.
 
-        Employee employeeValue{"Yusuf", "Sargin", 'M', 123123123, "12321312"};
 
-        Employee *employee1 = new Employee("Yusuf", "Sargin", 'M', 123123123, "12321312");
+        Employee *employee1 = new Employee(100, "Yusuf", "Sargin", 'M', 123123123, "12321312");
 
         return employee1;
     }

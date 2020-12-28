@@ -31,13 +31,13 @@ protected:
     int dayOffNumber;
 
 public:
-    People() : password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
+    People() :userId{0},  password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
                phone{"000000000"},
                email{""}, salary{0}, enterDate{""}, childNumber{0}, dayOffNumber{0} {
-        this->userId = generateRandomNumber();
     }
 
-    People(string firstName, string lastName, char sex, int TC, string phone) : People() {
+    People(int userId, string firstName, string lastName, char sex, int TC, string phone) : People() {
+        this->userId = userId;
         this->firstName = firstName;
         this->lastName = lastName;
         this->sex = sex;

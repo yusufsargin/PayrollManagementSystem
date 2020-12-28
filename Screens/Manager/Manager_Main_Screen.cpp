@@ -62,8 +62,8 @@ public:
 
     void collectEmployeeList(int size) {
         for (int i = 0; i < size; i++) {
-            Task *task = new Task(1000,"Deneme Taskı", "12/12/2020", "Deneme", HARD);
-            Employee *employee = new Employee("Deneme", "Deneme", 'M', 123123, "12123123");
+            Task *task = new Task(1000, "Deneme Taskı", "12/12/2020", "Deneme", HARD);
+            Employee *employee = new Employee(100, "Deneme", "Deneme", 'M', 123123, "12123123");
 
             employee->assignNewTaskToEmployee(*task);
 
@@ -121,7 +121,7 @@ public:
         cout << "3.VERY_HARD" << endl;
         cin >> taskLevel;
 
-        Task task{100,taskTitle, dueDate, description, taskLevel};
+        Task task{100, taskTitle, dueDate, description, taskLevel};
 
         manager->assignTaskToEmployee(employeeID, task);
     }

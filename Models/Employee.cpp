@@ -67,8 +67,8 @@ public:
         this->account = new Account;
     }
 
-    Employee(string firstName, string lastName, char sex, int TC, string phone)
-            : People(firstName, lastName, sex, TC,
+    Employee(int userId, string firstName, string lastName, char sex, int TC, string phone)
+            : People(userId, firstName, lastName, sex, TC,
                      phone) {
         this->tasks = new vector<Task *>();
         this->taskList = new Task[0];
