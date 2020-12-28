@@ -21,42 +21,42 @@ private:
     string id;
 };
 
-Human::Human() {
+HumanResources::HumanResources() {
     name = "Unknown";
     lastname = "Unknown";
     id = "0";
 }
 
-Human::Human(string _name, string _lastname, string _id) {
+HumanResources::HumanResources(string _name, string _lastname, string _id) {
     name = _name;
     lastname = _lastname;
     id = _id;
 }
 
-string Human::getName() {
+string HumanResources::getName() {
     return name;
 }
 
-void Human::setName(string name) {
+void HumanResources::setName(string name) {
     this->name = name;
 }
-string Human::getLastName() {
+string HumanResources::getLastName() {
     return lastname;
 }
 
-void Human::setLastName(string lastname) {
+void HumanResources::setLastName(string lastname) {
     this->lastname = lastname;
 }
 
-string Human::getID() {
+string HumanResources::getID() {
     return id;
 }
 
-void Human::setID(string id ){
+void HumanResources::setID(string id ){
     this->id = id;
 }
 
-void Human::print(string type) {
+void HumanResources::print(string type) {
     if (type == "light")
         cout << left << setw(20) << name << setw(20) << lastname <<  setw(20) << id << endl;
     else if (type == "headers")
