@@ -126,32 +126,34 @@ public:
 
     SCREEN auth() {
         SCREEN screen = IN_VALID_SCREEN;
+        int userID;
         string userId, password;
 
         cout << "Enter your user ID: ";
-        cin >> userId;
+        cin >> userID;
         cout << "Enter your password: ";
         cin >> password;
 
+        int peopleID, employeeID, hrID;
         string PeopleId, EmployeeId, HRId, ManagerId, Pass;
         string line;
 
         ifstream readWordPeople("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\People.txt");
         while (getline(readWordPeople, line)) {
-            readWordPeople >> PeopleId;
-            cout << PeopleId << endl;
+            readWordPeople >> peopleID;
+            cout << peopleID << endl;
 
             readWordPeople >> Pass;
             //cout << Pass<<endl;
 
-            if (userId == PeopleId && password == Pass) {
+            if (userID == peopleID && password == Pass) {
                 cout << "Enterance is successful!" << endl;
 
                 ifstream readWordEmployee("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Employee.txt");
                 while (getline(readWordEmployee, line)) {
-                    readWordEmployee >> EmployeeId;
+                    readWordEmployee >> employeeID;
 
-                    if (userId == EmployeeId) {
+                    if (userID == employeeID) {
                         screen = EMPLOYEE_SCREEN;
                     }
                 }
@@ -160,10 +162,10 @@ public:
 
                 ifstream readWordHR("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\HR.txt");
                 while (getline(readWordHR, line)) {
-                    readWordHR >> HRId;
+                    readWordHR >> hrID;
                     //cout << HRId << endl;
 
-                    if (userId == HRId) {
+                    if (userID == hrID) {
                         if (userId == HRId) {
                             screen = HR_SCREEN;
                         }
@@ -174,9 +176,8 @@ public:
                 }
 
             }
-            readWordPeople.close();
-
         }
+        readWordPeople.close();
 
         cout << "SCREEEEEEEN " << screen << endl;
         return screen;

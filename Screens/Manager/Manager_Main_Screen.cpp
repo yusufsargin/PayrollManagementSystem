@@ -31,13 +31,13 @@ class ManagerMainScreen {
 public:
     ManagerMainScreen() {
         this->vectorEmployeeList = new vector<Employee *>;
-        manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
+        manager = new Manager(001, "Yusuf", "Manager", 'M', 123123, "13212312312");
     }
 
     ManagerMainScreen(int employeeSize) {
         this->vectorEmployeeList = new vector<Employee *>;
 
-        manager = new Manager("Yusuf", "Manager", 'M', 123123, "13212312312");
+        manager = new Manager(001, "Yusuf", "Manager", 'M', 123123, "13212312312");
 
         collectEmployeeList(employeeSize);
 

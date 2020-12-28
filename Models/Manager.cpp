@@ -30,8 +30,9 @@ public:
         this->team = new Team;
     }
 
-    Manager(string firstName, string lastName, char sex, int tc, string phone) : Employee(firstName, lastName, sex, tc,
-                                                                                          phone) {
+    Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
+                                                                                                      lastName, sex, tc,
+                                                                                                      phone) {
         this->team = new Team;
     }
 

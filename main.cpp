@@ -65,64 +65,6 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
     }
 }
 
-SCREEN auth() {
-    SCREEN screen = IN_VALID_SCREEN;
-    string userId, password;
-
-    cout << "Enter your user ID: ";
-    cin >> userId;
-    cout << "Enter your password: ";
-    cin >> password;
-
-    string PeopleId, EmployeeId, HRId, ManagerId, Pass, empty;
-    string line;
-
-    ifstream readWordPeople("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\People.txt");
-    while (getline(readWordPeople, line)) {
-        readWordPeople >> PeopleId;
-        cout << PeopleId << endl;
-
-        readWordPeople >> Pass;
-        //cout << Pass<<endl;
-
-        if (userId == PeopleId && password == Pass) {
-            cout << "Enterance is successful!" << endl;
-
-            ifstream readWordEmployee("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Employee.txt");
-            while (getline(readWordEmployee, line)) {
-                readWordEmployee >> EmployeeId;
-
-                if (userId == EmployeeId) {
-                    screen = EMPLOYEE_SCREEN;
-                }
-            }
-            readWordEmployee.close();
-
-
-            ifstream readWordHR("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\HR.txt");
-            while (getline(readWordHR, line)) {
-                readWordHR >> HRId;
-                //cout << HRId << endl;
-
-                if (userId == HRId) {
-                    if (userId == HRId) {
-                        screen = HR_SCREEN;
-                    }
-                }
-                readWordHR.close();
-
-                break;
-            }
-
-        }
-        readWordPeople.close();
-
-    }
-
-    cout << "SCREEEEEEEN " <<screen << endl;
-    return screen;
-}
-
 int main() {
     Storage storage;
 
@@ -131,7 +73,7 @@ int main() {
     ManagerMainScreen *managerMainScreen = nullptr;
     Operations *operations = nullptr;
     bool isRun = true;
-    SCREEN screen = auth();
+    SCREEN screen = storage.auth();
 /*
     cout << "Enter Screen Type:" << endl;
     cout << "0.Employee Screen" << endl;
