@@ -2,10 +2,8 @@
 // Created by YUSUF on 28.12.2020.
 //
 
-#include "../../Operations/Operations.cpp"
-#include "../../Models/Storage.cpp"
-#include "../../Models/Employee.cpp"
 #include "string"
+#include "../../Models/Employee.cpp"
 
 using namespace std;
 

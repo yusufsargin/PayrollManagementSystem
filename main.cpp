@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Models/Storage.cpp"
-#include "Screens/Manager/Manager_Main_Screen.cpp"
+#include "./Models/Storage.cpp"
+#include "./Screens/Manager/Manager_Main_Screen.cpp"
 #include "./Operations/Operations.cpp"
-#include "Screens/Employee/Employee_Main_Screen.cpp"
-#include "Screens/HumanResources/HumanResources_Main_Screen.cpp"
+#include "./Screens/Employee/Employee_Main_Screen.cpp"
+#include "./Screens/HumanResources/HumanResources_Main_Screen.cpp"
 
 using namespace std;
 
@@ -95,6 +95,15 @@ int main() {
     Storage storage;
 
     storage.getTasks();
+
+    vector<Account*> *account = new vector<Account*>;
+
+    account = storage.getAccounts();
+
+    account->push_back(new Account(100,100,0));
+
+    storage.setStorageAccount(account);
+
     EmployeeMainScreen *employeeMainScreen = nullptr;
     ManagerMainScreen *managerMainScreen = nullptr;
     HumanResourcesMainScreen *humanResourcesMainScreen = nullptr;

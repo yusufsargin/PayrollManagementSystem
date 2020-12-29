@@ -143,7 +143,7 @@ public:
         double balance, dayOffsStuff;
         int accountId;
         string line;
-        ifstream readWordAccount("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Account.txt");
+        ifstream readWordAccount("C:\\Users\\yusuf_sargin\\Desktop\\yuksekLisans\\PayrollManagementSystem\\Account.txt");
 
         while (getline(readWordAccount, line) && !readWordAccount.eof()) {
             readWordAccount >> accountId;
@@ -170,6 +170,20 @@ public:
         }
 
         return accounts;
+    }
+
+    void setStorageAccount(vector<Account*> *accountList){
+        ofstream accountFile;
+        accountFile.open("C:\\Users\\yusuf_sargin\\Desktop\\yuksekLisans\\PayrollManagementSystem\\Account.txt");
+
+        if(accountFile.is_open()){
+            accountFile << "AccountId " << "Balance " << "DayOffStuff \n";
+            for(Account *account:*accountList){
+                accountFile  << account->getId() << " " << account->getBalance() << " "  <<  account->getDayOffsStuff() << "\n";
+            }
+
+            accountFile.close();
+        }
     }
 
     SCREEN auth() {
