@@ -104,7 +104,7 @@ public:
 
     Employee(int userId, int password, string firstName, string lastName, char sex, string TC, string phone,
              string enterDate, int childNumber, int dayOffNumber, double salary, string address, string email,
-             string birthDate, int department, int paidDayOffs, int workHours) : People(userId, password, firstName,
+             string birthDate, int department, int paidDayOffs, int workHours,int bonus) : People(userId, password, firstName,
                                                                                         lastName, sex, TC,
                                                                                         phone,
                                                                                         enterDate, childNumber,
@@ -114,6 +114,7 @@ public:
         this->department = convertDepartmentType(department);
         this->paidDayOffs = paidDayOffs;
         this->workHours = workHours;
+        this-> bonus = bonus;
     }
 
     Employee(People const &people, int department, int paidDayOffs) : People(people) {

@@ -62,22 +62,19 @@ public:
         employeeFile.open(employeePath);
 
         string line;
-        /*userId   password  name   lastName   tc  	sex	birthDate	phone	email	address  salary    enterDate   childNumber  izinMiktarı*/
-        int userId,  childNumber, dayOffNumber, password, department, taskId, bonus, workHours;
-        string name, tc,lastName, birtDate, phone, email, address, enterDate;
+        int userId = 0, childNumber, dayOffNumber, password, department, taskId, bonus, workHours, isActive;
+        string name, tc, lastName, birtDate, phone, email, address, enterDate;
         char sex;
         double salary;
 
 
-        vector<People*> *people = new vector<People *>;
+        vector<People *> *people = new vector<People *>;
         vector<Task *> *taskList = getTasks();
 
         vector<int> employeeID{};
         vector<int> employeeDepartment{};
-        /*Tasks	bonus	isActive    stuff	sigorta	 workHours*/
         vector<int> employeeTasksIds{};
         vector<int> employeeBonus{};
-        /*vector<int> employeeStuff{};*/
         vector<int> workHoursList{};
 
         if (peopleFile.is_open()) {
@@ -97,28 +94,28 @@ public:
                 peopleFile >> childNumber;
                 peopleFile >> dayOffNumber;
 
-                People *peoplePushItem = new People(userId, password, name, lastName, sex, tc, phone, enterDate, childNumber,
-                                                    dayOffNumber, salary, address, email, birtDate);
-                people->push_back(peoplePushItem);
+                if (userId != 0) {
+                    People *peoplePushItem = new People(userId, password, name, lastName, sex, tc, phone, enterDate,
+                                                        childNumber,
+                                                        dayOffNumber, salary, address, email, birtDate);
+                    people->push_back(peoplePushItem);
+                }
             }
 
             peopleFile.close();
         }
-
-        /*cout << people->at(2)->getFirstName() << endl;*/
-        cout << people->at(0)->getFirstName() << endl;
-        cout << people->at(1)->getFirstName() << endl;
+        string employeeLine;
         if (employeeFile.is_open()) {
-            while (getline(employeeFile, line) && !employeeFile.eof()) {
+            while (getline(employeeFile, employeeLine)) {
                 employeeFile >> userId;
                 employeeFile >> department;
                 employeeFile >> taskId;
+                employeeFile >> bonus;
+                employeeFile >> isActive;
                 employeeFile >> workHours;
 
                 for (People *peopleItem:*people) {
                     if (peopleItem->getUserId() == userId) {
-                        vector<Task *> *tasksForEmployee = new vector<Task *>;
-
                         Employee *employee = new Employee(
                                 peopleItem->getUserId(),
                                 peopleItem->getPassword(),
@@ -136,22 +133,27 @@ public:
                                 peopleItem->getBirthDate(),
                                 department,
                                 0,
-                                workHours
+                                workHours,
+                                bonus
                         );
 
-                        for (Task *task:*taskList) {
+                        this->employeeList->push_back(employee);
+                        /*for (Task *task:*taskList) {
                             if (task->getId() == userId) {
-                                tasksForEmployee->push_back(task);
+                                *//*for (int i = 0; i < employeeList->size(); i++) {
+                                    if (employeeList->at(i)->getUserId() == userId) {
+                                        Task *taskItem = task;
+                                        this->employeeList->at(i)->assignNewTaskToEmployee(taskItem);
+                                    }
+                                }*//*
                             }
-                        }
+                        }*/
 
                         //employee->setTasks(tasksForEmployee);
-                        this->employeeList->push_back(employee);
                     }
                 }
-
-                employeeFile.close();
             }
+            employeeFile.close();
         }
 
         return employeeList;
@@ -265,11 +267,11 @@ public:
             this->accounts->push_back(new Account(accountIds.at(i), accountBalances.at(i), accountDayOffsStuffs.at(i)));
         }
 
-       /* for (Account *account:*accounts) {
-            cout << "Account ID: " << account->getId() << endl;
-            cout << "Balance: " << account->getBalance() << endl;
-            cout << "DayOffs Stuff: " << account->getDayOffsStuff() << endl;
-        }*/
+        /* for (Account *account:*accounts) {
+             cout << "Account ID: " << account->getId() << endl;
+             cout << "Balance: " << account->getBalance() << endl;
+             cout << "DayOffs Stuff: " << account->getDayOffsStuff() << endl;
+         }*/
 
         return accounts;
     }
