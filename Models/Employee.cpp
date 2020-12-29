@@ -112,7 +112,7 @@ public:
                                                                                         address, email,
                                                                                         birthDate) {
         this->department = convertDepartmentType(department);
-        this->paidDayOffs = paidDayOffs;
+        this->paidDayOffs = dayOffNumber;
         this->workHours = workHours;
         this-> bonus = bonus;
     }
@@ -160,7 +160,12 @@ public:
         cout << left << setw(GAP) << "First Name";
         cout << left << setw(GAP) << "Last Name";
         cout << left << setw(GAP) << "Sex";
-        cout << left << setw(GAP) << "Phone" << endl;
+        cout << left << setw(GAP) << "TC";
+        cout << left << setw(GAP) << "Birth Date";
+        cout << left << setw(GAP) << "Email";
+        cout << left << setw(GAP) << "Enter Date";
+        cout << left << setw(GAP) << "Child Number";
+        cout << left << setw(GAP) << "Day Off Number" << endl;
     }
 
     void displayMyInfo(bool headerExist = false) {
@@ -171,7 +176,12 @@ public:
         cout << left << setw(GAP) << getFirstName();
         cout << left << setw(GAP) << getLastName();
         cout << left << setw(GAP) << getSex();
-        cout << left << setw(GAP) << getPhone() << endl;
+        cout << left << setw(GAP) << getTc();
+        cout << left << setw(GAP) << getBirthDate();
+        cout << left << setw(GAP) << getEmail();
+        cout << left << setw(GAP) << getEnterDate();
+        cout << left << setw(GAP) << getChildNumber();
+        cout << left << setw(GAP) << getDayoffNumber() << endl;
     }
 
 

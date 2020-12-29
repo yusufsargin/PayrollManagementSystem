@@ -99,8 +99,9 @@ int main() {
     vector<Account *> *account = storage.getAccounts();
     vector<Employee *> *employeeList = storage.getEmployeeList();
 
+    employeeList->at(0)->headerOfInfoTable();
     for(Employee *emp:*employeeList){
-        cout << emp->getFirstName() << emp->getWorkHours()<< endl;
+       emp->displayMyInfo(true);
     }
 
     account->push_back(new Account(100, 100, 0));
