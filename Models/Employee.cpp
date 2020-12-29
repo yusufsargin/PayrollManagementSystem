@@ -84,8 +84,10 @@ public:
         this->paidDayOffs = 0;
     }
 
-    Employee(int userId, string firstName, string lastName, char sex, int TC, string phone , int paidDayOffs , int department)
-            : People(userId, firstName, lastName, sex, TC,
+    Employee(int userId, int password, string firstName, string lastName, char sex, string TC, string phone,
+             int paidDayOffs,
+             int department)
+            : People(userId, password, firstName, lastName, sex, TC,
                      phone) {
         this->tasks = new vector<Task *>();
         this->taskList = new Task[0];
@@ -98,6 +100,25 @@ public:
         this->account = new Account;
         this->paidDayOffs = paidDayOffs;
         this->department = convertDepartmentType(department);
+    }
+
+    Employee(int userId, int password, string firstName, string lastName, char sex, string TC, string phone,
+             string enterDate, int childNumber, int dayOffNumber, double salary, string address, string email,
+             string birthDate, int department, int paidDayOffs, int workHours) : People(userId, password, firstName,
+                                                                                        lastName, sex, TC,
+                                                                                        phone,
+                                                                                        enterDate, childNumber,
+                                                                                        dayOffNumber, salary,
+                                                                                        address, email,
+                                                                                        birthDate) {
+        this->department = convertDepartmentType(department);
+        this->paidDayOffs = paidDayOffs;
+        this->workHours = workHours;
+    }
+
+    Employee(People const &people, int department, int paidDayOffs) : People(people) {
+        this->department = convertDepartmentType(department);
+        this->paidDayOffs = paidDayOffs;
     }
 
     ~Employee() {
@@ -125,7 +146,7 @@ public:
         this->account = obj.account;
         tasks = new vector<Task *>;
         taskList = new Task[obj.taskSize];
-        this->paidDayOffs=obj.paidDayOffs;
+        this->paidDayOffs = obj.paidDayOffs;
         this->taskSize = obj.taskSize;
         for (int i = 0; i < obj.taskSize; i++) {
             tasks->at(i) = obj.tasks->at(i);
@@ -241,6 +262,10 @@ public:
         return tasks;
     }
 
+    void setTasks(vector<Task *> *task) {
+        this->tasks = task;
+    }
+
     double getBonus() {
         this->bonus = account->calcBonus(*tasks);
         return bonus;
@@ -271,14 +296,13 @@ public:
         Employee::workHours = workHours;
     }
 
-    void setDayoffNumber(int paidDayOffs)
-    {
+    void setDayoffNumber(int paidDayOffs) {
         this->paidDayOffs = paidDayOffs;
     }
-    int getDayoffNumber(){return paidDayOffs;}
 
-    void setDepartmentWithInt(int department)
-    {
+    int getDayoffNumber() { return paidDayOffs; }
+
+    void setDepartmentWithInt(int department) {
         this->department = convertDepartmentType(department);
     }
 };

@@ -37,27 +37,27 @@ class EmployeeMainScreen {
             "5.Update Task Status"};
     Employee *employee;
 public:
-    EmployeeMainScreen() {
-        this->employee = getEmployeeValueFromStorage();
-        Task *task = new Task(100, "Deneme", "19/12/2020", "Deneme Tasks", HARD);
+    EmployeeMainScreen(Employee *employeeItem) {
+        this->employee = employeeItem;
+        /*Task *task = new Task(100, "Deneme", "19/12/2020", "Deneme Tasks", HARD);
 
-        this->employee->assignNewTaskToEmployee(*task);
+        this->employee->assignNewTaskToEmployee(*task);*/
 
-        delete task;
+       /* delete task;*/
     }
 
     ~EmployeeMainScreen() {
         delete employee;
     }
 
-    Employee *getEmployeeValueFromStorage() {
+    /*Employee *getEmployeeValueFromStorage() {
         //Buradaki değerler file dan alınan değerler ile değiştirilecek.
 
 
         Employee *employee1 = new Employee(100, "Yusuf", "Sargin", 'M', 123123123, "12321312",0,0);
 
         return employee1;
-    }
+    }*/
 
     vector<string> getEmployeeOperations() {
         return operationsValue;

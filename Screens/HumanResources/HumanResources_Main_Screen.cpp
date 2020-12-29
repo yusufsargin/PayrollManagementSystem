@@ -113,8 +113,8 @@ public:
         cout<<"Enter department(0-Software engineer 1-Human resources 2-Sales manager 3-Intern): ";
         cin>>department;
         cout<<endl;
-        new_employee = new Employee(ID,firstName,lastName,sex,TC,phone , dayoffNum , department);
-        employeeList->push_back(new_employee);
+        //new_employee = new Employee(ID,firstName,lastName,sex,TC,phone , dayoffNum , department);
+        //employeeList->push_back(new_employee);
     }
 
     void updateEmployee() {

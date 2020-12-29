@@ -17,7 +17,7 @@ private:
     int password;
     string firstName;
     string lastName;
-    int TC;
+    string TC;
     char sex;
     string birthDate;
     string phone;
@@ -31,18 +31,38 @@ protected:
     int dayOffNumber;
 
 public:
-    People() :userId{0},  password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
+    People() : userId{0}, password{0}, firstName{""}, lastName{""}, TC{00000000000}, sex{'M'}, birthDate{"01/01/2020"},
                phone{"000000000"},
                email{""}, salary{0}, enterDate{""}, childNumber{0}, dayOffNumber{0} {
     }
 
-    People(int userId, string firstName, string lastName, char sex, int TC, string phone) : People() {
+    People(int userId, int password, string firstName, string lastName, char sex, string TC, string phone) : People() {
         this->userId = userId;
+        this->password = password;
         this->firstName = firstName;
         this->lastName = lastName;
         this->sex = sex;
         this->TC = TC;
         this->phone = phone;
+    }
+
+    People(int userId, int password, string firstName, string lastName, char sex, string TC, string phone,
+           string enterDate, int childNumber, int dayOffNumber, double salary, string address, string email,
+           string birthDate){
+        this->userId = userId;
+        this->password = password;
+        this->firstName = firstName;
+        this->lastName = lastName;
+        this->sex = sex;
+        this->TC = TC;
+        this->phone = phone;
+        this->enterDate = enterDate;
+        this->childNumber = childNumber;
+        this->dayOffNumber = dayOffNumber;
+        this->salary = salary;
+        this->address = address;
+        this->birthDate = birthDate;
+        this->email = email;
     }
 
     People(People const &obj) {
@@ -106,7 +126,7 @@ public:
         this->lastName = lastName;
     }
 
-    int getTc() const {
+    string getTc() const {
         return TC;
     }
 
@@ -154,7 +174,9 @@ public:
         this->address = address;
     }
 
-    virtual double getSalary() = 0;
+    virtual double getSalary() {
+        return salary;
+    };
 
     void setSalary(double salary) {
         this->salary = salary;

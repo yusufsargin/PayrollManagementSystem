@@ -9,6 +9,7 @@
 #include "Employee.cpp"
 #include "ScreenType.h"
 #include "Account.h"
+#include <string>
 
 using namespace std;
 
@@ -16,6 +17,11 @@ class Storage {
     vector<Employee *> *employeeList;
     vector<Task *> *tasks;
     vector<Account *> *accounts;
+    string accountPath = "D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Account.txt";
+    string employeePath = "D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Employee.txt";
+    string peoplePath = "D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\People.txt";
+    string stuffPath = "D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Stuff.txt";
+    string tasksPath = "D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Tasks.txt";
 public:
     Storage() {
         this->employeeList = new vector<Employee *>();
@@ -51,6 +57,102 @@ public:
     }
 
     vector<Employee *> *getEmployeeList() {
+        ifstream peopleFile, employeeFile;
+        peopleFile.open(peoplePath);
+        employeeFile.open(employeePath);
+
+        string line;
+        /*userId   password  name   lastName   tc  	sex	birthDate	phone	email	address  salary    enterDate   childNumber  izinMiktarı*/
+        int userId,  childNumber, dayOffNumber, password, department, taskId, bonus, workHours;
+        string name, tc,lastName, birtDate, phone, email, address, enterDate;
+        char sex;
+        double salary;
+
+
+        vector<People*> *people = new vector<People *>;
+        vector<Task *> *taskList = getTasks();
+
+        vector<int> employeeID{};
+        vector<int> employeeDepartment{};
+        /*Tasks	bonus	isActive    stuff	sigorta	 workHours*/
+        vector<int> employeeTasksIds{};
+        vector<int> employeeBonus{};
+        /*vector<int> employeeStuff{};*/
+        vector<int> workHoursList{};
+
+        if (peopleFile.is_open()) {
+            while (getline(peopleFile, line)) {
+                peopleFile >> userId;
+                peopleFile >> password;
+                peopleFile >> name;
+                peopleFile >> lastName;
+                peopleFile >> tc;
+                peopleFile >> sex;
+                peopleFile >> birtDate;
+                peopleFile >> phone;
+                peopleFile >> email;
+                peopleFile >> address;
+                peopleFile >> salary;
+                peopleFile >> enterDate;
+                peopleFile >> childNumber;
+                peopleFile >> dayOffNumber;
+
+                People *peoplePushItem = new People(userId, password, name, lastName, sex, tc, phone, enterDate, childNumber,
+                                                    dayOffNumber, salary, address, email, birtDate);
+                people->push_back(peoplePushItem);
+            }
+
+            peopleFile.close();
+        }
+
+        /*cout << people->at(2)->getFirstName() << endl;*/
+        cout << people->at(0)->getFirstName() << endl;
+        cout << people->at(1)->getFirstName() << endl;
+        if (employeeFile.is_open()) {
+            while (getline(employeeFile, line) && !employeeFile.eof()) {
+                employeeFile >> userId;
+                employeeFile >> department;
+                employeeFile >> taskId;
+                employeeFile >> workHours;
+
+                for (People *peopleItem:*people) {
+                    if (peopleItem->getUserId() == userId) {
+                        vector<Task *> *tasksForEmployee = new vector<Task *>;
+
+                        Employee *employee = new Employee(
+                                peopleItem->getUserId(),
+                                peopleItem->getPassword(),
+                                peopleItem->getFirstName(),
+                                peopleItem->getLastName(),
+                                peopleItem->getSex(),
+                                peopleItem->getTc(),
+                                peopleItem->getPhone(),
+                                peopleItem->getEnterDate(),
+                                peopleItem->getChildNumber(),
+                                peopleItem->getDayOffNumber(),
+                                peopleItem->getSalary(),
+                                peopleItem->getAddress(),
+                                peopleItem->getEmail(),
+                                peopleItem->getBirthDate(),
+                                department,
+                                0,
+                                workHours
+                        );
+
+                        for (Task *task:*taskList) {
+                            if (task->getId() == userId) {
+                                tasksForEmployee->push_back(task);
+                            }
+                        }
+
+                        //employee->setTasks(tasksForEmployee);
+                        this->employeeList->push_back(employee);
+                    }
+                }
+
+                employeeFile.close();
+            }
+        }
 
         return employeeList;
     }
@@ -96,7 +198,7 @@ public:
         int level;
         int status;
         string line;
-        ifstream readWordTask("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Tasks.txt");
+        ifstream readWordTask(tasksPath);
 
         while (getline(readWordTask, line) && !readWordTask.eof()) {
             readWordTask >> taskId;
@@ -122,14 +224,14 @@ public:
                                             taskLevels.at(i)));
         }
 
-        for (Task *task:*tasks) {
+        /*for (Task *task:*tasks) {
             cout << "ID:" << task->getId() << endl;
             cout << task->getTaskTitle() << endl;
             cout << task->getDescription() << endl;
             cout << task->getDueDate() << endl;
             cout << task->getLevel() << endl;
             cout << task->getTaskStatus() << endl;
-        }
+        }*/
 
         return tasks;
     }
@@ -143,7 +245,7 @@ public:
         double balance, dayOffsStuff;
         int accountId;
         string line;
-        ifstream readWordAccount("C:\\Users\\yusuf_sargin\\Desktop\\yuksekLisans\\PayrollManagementSystem\\Account.txt");
+        ifstream readWordAccount(accountPath);
 
         while (getline(readWordAccount, line) && !readWordAccount.eof()) {
             readWordAccount >> accountId;
@@ -163,26 +265,45 @@ public:
             this->accounts->push_back(new Account(accountIds.at(i), accountBalances.at(i), accountDayOffsStuffs.at(i)));
         }
 
-        for (Account *account:*accounts) {
+       /* for (Account *account:*accounts) {
             cout << "Account ID: " << account->getId() << endl;
             cout << "Balance: " << account->getBalance() << endl;
             cout << "DayOffs Stuff: " << account->getDayOffsStuff() << endl;
-        }
+        }*/
 
         return accounts;
     }
 
-    void setStorageAccount(vector<Account*> *accountList){
+    void setStorageAccount(vector<Account *> *accountList) {
         ofstream accountFile;
-        accountFile.open("C:\\Users\\yusuf_sargin\\Desktop\\yuksekLisans\\PayrollManagementSystem\\Account.txt");
+        accountFile.open(accountPath);
 
-        if(accountFile.is_open()){
+        if (accountFile.is_open()) {
             accountFile << "AccountId " << "Balance " << "DayOffStuff \n";
-            for(Account *account:*accountList){
-                accountFile  << account->getId() << " " << account->getBalance() << " "  <<  account->getDayOffsStuff() << "\n";
+            //accountList->push_back(new Account(4,500,20));
+            for (Account *account:*accountList) {
+                accountFile << account->getId() << " " << account->getBalance() << " " << account->getDayOffsStuff()
+                            << "\n";
             }
 
             accountFile.close();
+        }
+    }
+
+    void setEmployeeList(vector<Employee *> *employeeList) {
+        ofstream employeeFile;
+        employeeFile.open(employeePath);
+
+        if (employeeFile.is_open()) {
+            /*"userID    Department\tTasks\tbonus\tisActive    stuff\tsigorta\t workHours";*/
+            employeeFile << "UserId " << "Department " << "Tasks " << "Bonus " << "isActive " << "workHours" << endl;
+            for (Employee *employee:*employeeList) {
+                employeeFile << employee->getUserId() << " " << employee->getDepartment() << " " <<
+                             employee->getTasks() << " " << employee->getBonus() << " " <<
+                             employee->isActive1() << " " << employee->getWorkHours() << endl;
+            }
+
+            employeeFile.close();
         }
     }
 
@@ -200,7 +321,7 @@ public:
         string PeopleId, EmployeeId, HRId, ManagerId, Pass;
         string line;
 
-        ifstream readWordPeople("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\People.txt");
+        ifstream readWordPeople(peoplePath);
         while (getline(readWordPeople, line)) {
             readWordPeople >> peopleID;
             cout << peopleID << endl;
@@ -211,7 +332,7 @@ public:
             if (userID == peopleID && password == Pass) {
                 cout << "Enterance is successful!" << endl;
 
-                ifstream readWordEmployee("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\Employee.txt");
+                ifstream readWordEmployee(employeePath);
                 while (getline(readWordEmployee, line)) {
                     readWordEmployee >> employeeID;
 

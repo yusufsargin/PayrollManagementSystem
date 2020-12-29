@@ -30,11 +30,11 @@ public:
         this->team = new Team;
     }
 
-    Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
+   /* Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
                                                                                                       lastName, sex, tc,
                                                                                                       phone,0,0) {
         this->team = new Team;
-    }
+    }*/
 
     Manager(Manager const &obj) {
         if (team != nullptr) {

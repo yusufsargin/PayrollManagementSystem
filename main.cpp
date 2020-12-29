@@ -96,11 +96,10 @@ int main() {
 
     storage.getTasks();
 
-    vector<Account*> *account = new vector<Account*>;
+    vector<Account *> *account = storage.getAccounts();
+    vector<Employee *> *employeeList = storage.getEmployeeList();
 
-    account = storage.getAccounts();
-
-    account->push_back(new Account(100,100,0));
+    account->push_back(new Account(100, 100, 0));
 
     storage.setStorageAccount(account);
 
@@ -119,7 +118,7 @@ int main() {
     cin >> screen;*/
 
     if (screen == EMPLOYEE_SCREEN) {
-        employeeMainScreen = new EmployeeMainScreen;
+        employeeMainScreen = new EmployeeMainScreen(employeeList->at(0));
         operations = new Operations(employeeMainScreen->getEmployeeOperations());
     } else if (screen == MANAGER_SCREEN) {
         managerMainScreen = new ManagerMainScreen(1);
