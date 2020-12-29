@@ -19,6 +19,10 @@ public:
         this->employeeVector = new vector<Employee *>();
     }
 
+    Team(vector<Employee *> *employeeList) {
+        this->employeeVector = employeeList;
+    }
+
     Team(Team const &obj) {
         delete employeeVector;
 
@@ -50,9 +54,11 @@ public:
 
     void updateTaskDueDate(int id, string dueDate) {
         for (Employee *employee: *employeeVector) {
-            for (Task *task: *employee->getTasks()) {
-                if (task->getId() == id) {
-                    task->setDueDate(dueDate);
+            if (employee->getTasks() != nullptr) {
+                for (Task *task: *employee->getTasks()) {
+                    if (task->getId() == id) {
+                        task->setDueDate(dueDate);
+                    }
                 }
             }
         }
@@ -63,9 +69,13 @@ public:
     void assignTaskToEmployee(int employeeID, Task task) {
         for (Employee *employee:*employeeVector) {
             if (employee->getUserId() == employeeID) {
-                employee->assignNewTaskToEmployee(task);
+                if (employee->getTasks() != nullptr) {
+                    employee->assignNewTaskToEmployee(task);
 
-                employee->showExistTasks();
+                    employee->showExistTasks();
+                } else {
+                    cout << "Wrong Operation" << endl;
+                }
             }
         }
     }

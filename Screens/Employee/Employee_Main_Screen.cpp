@@ -43,7 +43,7 @@ public:
 
         this->employee->assignNewTaskToEmployee(*task);*/
 
-       /* delete task;*/
+        /* delete task;*/
     }
 
     ~EmployeeMainScreen() {
@@ -118,9 +118,11 @@ public:
                 cout << "Value is not valid" << endl;
         }
 
-        for (int i = 0; i < employee->getTasks()->size(); i++) {
-            if (employee->getTasks()->at(i)->getId() == taskId) {
-                employee->getTasks()->at(i)->setTaskStatus(taskStatus);
+        if (employee->getTasks() != nullptr) {
+            for (int i = 0; i < employee->getTasks()->size(); i++) {
+                if (employee->getTasks()->at(i)->getId() == taskId) {
+                    employee->getTasks()->at(i)->setTaskStatus(taskStatus);
+                }
             }
         }
 

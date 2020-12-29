@@ -104,17 +104,19 @@ public:
 
     Employee(int userId, int password, string firstName, string lastName, char sex, string TC, string phone,
              string enterDate, int childNumber, int dayOffNumber, double salary, string address, string email,
-             string birthDate, int department, int paidDayOffs, int workHours,int bonus) : People(userId, password, firstName,
-                                                                                        lastName, sex, TC,
-                                                                                        phone,
-                                                                                        enterDate, childNumber,
-                                                                                        dayOffNumber, salary,
-                                                                                        address, email,
-                                                                                        birthDate) {
+             string birthDate, int department, int paidDayOffs, int workHours, int bonus) : People(userId, password,
+                                                                                                   firstName,
+                                                                                                   lastName, sex, TC,
+                                                                                                   phone,
+                                                                                                   enterDate,
+                                                                                                   childNumber,
+                                                                                                   dayOffNumber, salary,
+                                                                                                   address, email,
+                                                                                                   birthDate) {
         this->department = convertDepartmentType(department);
         this->paidDayOffs = dayOffNumber;
         this->workHours = workHours;
-        this-> bonus = bonus;
+        this->bonus = bonus;
     }
 
     Employee(People const &people, int department, int paidDayOffs) : People(people) {
@@ -230,13 +232,15 @@ public:
         cout << left << setw(GAP) << "Task Due Date";
         cout << left << setw(GAP) << "Task Diff Level" << endl;
 
-        for (Task *task: *tasks) {
-            cout << left << setw(GAP) << task->getId();
-            cout << left << setw(GAP) << task->getTaskTitle();
-            cout << left << setw(GAP) << task->getDescription();
-            cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
-            cout << left << setw(GAP) << task->getDueDate();
-            cout << left << setw(GAP) << convertTaskLevelTypes(task->getLevel()) << endl;
+        if (tasks != nullptr) {
+            for (Task *task: *tasks) {
+                cout << left << setw(GAP) << task->getId();
+                cout << left << setw(GAP) << task->getTaskTitle();
+                cout << left << setw(GAP) << task->getDescription();
+                cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
+                cout << left << setw(GAP) << task->getDueDate();
+                cout << left << setw(GAP) << convertTaskLevelTypes(task->getLevel()) << endl;
+            }
         }
     }
 
@@ -250,13 +254,16 @@ public:
         cout << left << setw(GAP) << "Task Description";
         cout << left << setw(GAP) << "Task Status";
         cout << left << setw(GAP) << "Task Diff Level" << endl;
-        for (Task *task:*tasks) {
-            if (task->getTaskStatus() == taskStatus) {
-                cout << left << setw(GAP) << task->getId();
-                cout << left << setw(GAP) << task->getTaskTitle();
-                cout << left << setw(GAP) << task->getDescription();
-                cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
-                cout << left << setw(GAP) << task->getLevel() << endl;
+
+        if (tasks != nullptr) {
+            for (Task *task:*tasks) {
+                if (task->getTaskStatus() == taskStatus) {
+                    cout << left << setw(GAP) << task->getId();
+                    cout << left << setw(GAP) << task->getTaskTitle();
+                    cout << left << setw(GAP) << task->getDescription();
+                    cout << left << setw(GAP) << convertTaskStatusTypes(task->getTaskStatus());
+                    cout << left << setw(GAP) << task->getLevel() << endl;
+                }
             }
         }
     }
@@ -278,7 +285,9 @@ public:
     }
 
     double getBonus() {
-        this->bonus = account->calcBonus(*tasks);
+        if (tasks != nullptr) {
+            this->bonus = account->calcBonus(*tasks);
+        }
         return bonus;
     }
 

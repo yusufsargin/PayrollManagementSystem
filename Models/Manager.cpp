@@ -25,16 +25,28 @@ using namespace std;
 
 class Manager : public Employee {
     Team *team = nullptr;
+    Employee *employee;
 public:
     Manager() : Employee() {
         this->team = new Team;
+        employee = new Employee;
     }
 
-   /* Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
-                                                                                                      lastName, sex, tc,
-                                                                                                      phone,0,0) {
-        this->team = new Team;
-    }*/
+    Manager(vector<Employee *> *employeeList) {
+        this->team = new Team(employeeList);
+        for(Employee *emp: *employeeList){
+            if(emp->getDepartment() == Sales_Manager){
+                this->employee = emp;
+                break;
+            }
+        }
+    }
+
+    /* Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
+                                                                                                       lastName, sex, tc,
+                                                                                                       phone,0,0) {
+         this->team = new Team;
+     }*/
 
     Manager(Manager const &obj) {
         if (team != nullptr) {
@@ -45,6 +57,7 @@ public:
 
     ~Manager() {
         delete team;
+        delete employee;
     }
 
     void setTeamMembers(vector<Employee *> *list, int listSize) {
@@ -68,7 +81,7 @@ public:
     }
 
     void showManagerInfo() {
-        this->displayMyInfo();
+        this->employee->displayMyInfo();
     }
 };
 

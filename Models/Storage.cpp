@@ -334,18 +334,27 @@ public:
             if (userID == peopleID && password == Pass) {
                 cout << "Enterance is successful!" << endl;
 
+
                 ifstream readWordEmployee(employeePath);
                 while (getline(readWordEmployee, line)) {
+                    int dept;
                     readWordEmployee >> employeeID;
 
+                    readWordEmployee >> dept;
                     if (userID == employeeID) {
-                        screen = EMPLOYEE_SCREEN;
+                        if (dept == 1) {
+                            screen = HR_SCREEN;
+                        } else if (dept == 2) {
+                            screen = MANAGER_SCREEN;
+                        } else {
+                            screen = EMPLOYEE_SCREEN;
+                        }
                     }
                 }
                 readWordEmployee.close();
 
 
-                ifstream readWordHR("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\HR.txt");
+                /*ifstream readWordHR("D:\\yukseklisansLab\\241\\yedek\\PayrollManagementSystem\\HR.txt");
                 while (getline(readWordHR, line)) {
                     readWordHR >> hrID;
                     //cout << HRId << endl;
@@ -358,7 +367,7 @@ public:
                     readWordHR.close();
 
                     break;
-                }
+                }*/
 
             }
         }

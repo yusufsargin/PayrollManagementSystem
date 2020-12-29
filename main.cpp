@@ -96,17 +96,12 @@ int main() {
 
     storage.getTasks();
 
-    vector<Account *> *account = storage.getAccounts();
     vector<Employee *> *employeeList = storage.getEmployeeList();
 
     employeeList->at(0)->headerOfInfoTable();
     for(Employee *emp:*employeeList){
        emp->displayMyInfo(true);
     }
-
-    account->push_back(new Account(100, 100, 0));
-
-    storage.setStorageAccount(account);
 
     EmployeeMainScreen *employeeMainScreen = nullptr;
     ManagerMainScreen *managerMainScreen = nullptr;
@@ -126,7 +121,7 @@ int main() {
         employeeMainScreen = new EmployeeMainScreen(employeeList->at(0));
         operations = new Operations(employeeMainScreen->getEmployeeOperations());
     } else if (screen == MANAGER_SCREEN) {
-        managerMainScreen = new ManagerMainScreen(1);
+        managerMainScreen = new ManagerMainScreen(employeeList);
         operations = new Operations(managerMainScreen->getManagerOperations());
     } else if (screen == HR_SCREEN) {
         humanResourcesMainScreen = new HumanResourcesMainScreen();
@@ -149,51 +144,6 @@ int main() {
             default:
                 break;
         }
-        /* *//*switch (displayOperationsValuesAndGetValue(*operations,"Employee Operations")) {
-            case SHOW_EMPLOYEE_INFO:
-                employeeMainScreen.showEmployeeInfo();
-                break;
-            case SHOW_ASSIGNED_TASKS:
-                employeeMainScreen.showAssignedTasks();
-                break;
-            case SHOW_BONUS_AMOUNT:
-                employeeMainScreen.showBonusAmount();
-                break;
-            case UPDATE_TASK_STATUS:
-                employeeMainScreen.updateTaskStatus();
-                break;
-            case SHOW_DONE_TASKS:
-                employeeMainScreen.filterTaskByStatus(DONE);
-                break;
-            case EXIT:
-                isRun = false;
-                break;
-            default:
-                break;
-        }*//*
-        EmployeeOperations(operations, employeeMainScreen, isRun);
-        switch (displayOperationsValuesAndGetValue(*operations, "Manager Options")) {
-            case SHOW_MANAGER_INFO:
-                managerMainScreen.showManagerInfo();
-                break;
-            case SHOW_MANAGER_TEAM_MEMBERS:
-                managerMainScreen.showManagerTeamMembers();
-                break;
-            case SHOW_MANAGER_TEAM_TASKS:
-                managerMainScreen.showMembersAllTasks();
-                break;
-            case UPDATE_MANGER_TASK_DUE_DATE:
-                managerMainScreen.updateTaskDueDate();
-                break;
-            case ASSIGN_TASK_TO_EMPLOYEE:
-                managerMainScreen.assignTaskToEmployee();
-                break;
-            case EXIT:
-                isRun = false;
-                break;
-            default:
-                break;
-        }*/
     }
 
     delete managerMainScreen;
