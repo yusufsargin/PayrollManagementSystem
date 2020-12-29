@@ -63,7 +63,7 @@ public:
     void collectEmployeeList(int size) {
         for (int i = 0; i < size; i++) {
             Task *task = new Task(1000, "Deneme Taskı", "12/12/2020", "Deneme", HARD);
-            Employee *employee = new Employee(100, "Deneme", "Deneme", 'M', 123123, "12123123");
+            Employee *employee = new Employee(100, "Deneme", "Deneme", 'M', 123123, "12123123",0,0);
 
             employee->assignNewTaskToEmployee(*task);
 

@@ -9,7 +9,8 @@ enum Department {
     Software_Engineer = 0,
     Human_Resources,
     Sales_Manager,
-    Intern
+    Intern,
+    IN_VALID_DEPARTMENT
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_DEPARTMANS_H

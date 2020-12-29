@@ -32,7 +32,7 @@ public:
 
     Manager(int userId, string firstName, string lastName, char sex, int tc, string phone) : Employee(userId, firstName,
                                                                                                       lastName, sex, tc,
-                                                                                                      phone) {
+                                                                                                      phone,0,0) {
         this->team = new Team;
     }
 

@@ -24,6 +24,7 @@ class Employee : public People {
     bool isActive;
     double workHours;
     int taskSize = 0;
+    int paidDayOffs;
     Account *account = nullptr;
 private:
     string convertTaskStatusTypes(TaskStatus taskStatus) {
@@ -55,6 +56,21 @@ private:
         }
     }
 
+    Department convertDepartmentType(int department) {
+        switch (department) {
+            case 0:
+                return Software_Engineer;
+            case 1:
+                return Human_Resources;
+            case 2:
+                return Sales_Manager;
+            case 3:
+                return Intern;
+            default:
+                return IN_VALID_DEPARTMENT;
+        }
+    }
+
 public:
     Employee() : People() {
         this->tasks = new vector<Task *>();
@@ -65,9 +81,10 @@ public:
         this->workHours = 0;
         this->taskSize = 0;
         this->account = new Account;
+        this->paidDayOffs = 0;
     }
 
-    Employee(int userId, string firstName, string lastName, char sex, int TC, string phone)
+    Employee(int userId, string firstName, string lastName, char sex, int TC, string phone , int paidDayOffs , int department)
             : People(userId, firstName, lastName, sex, TC,
                      phone) {
         this->tasks = new vector<Task *>();
@@ -79,6 +96,8 @@ public:
         this->GAP = 20;
         this->taskSize = 0;
         this->account = new Account;
+        this->paidDayOffs = paidDayOffs;
+        this->department = convertDepartmentType(department);
     }
 
     ~Employee() {
@@ -106,6 +125,7 @@ public:
         this->account = obj.account;
         tasks = new vector<Task *>;
         taskList = new Task[obj.taskSize];
+        this->paidDayOffs=obj.paidDayOffs;
         this->taskSize = obj.taskSize;
         for (int i = 0; i < obj.taskSize; i++) {
             tasks->at(i) = obj.tasks->at(i);
@@ -249,6 +269,17 @@ public:
 
     void setWorkHours(double workHours) {
         Employee::workHours = workHours;
+    }
+
+    void setDayoffNumber(int paidDayOffs)
+    {
+        this->paidDayOffs = paidDayOffs;
+    }
+    int getDayoffNumber(){return paidDayOffs;}
+
+    void setDepartmentWithInt(int department)
+    {
+        this->department = convertDepartmentType(department);
     }
 };
 

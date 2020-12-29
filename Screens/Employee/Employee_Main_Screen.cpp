@@ -54,7 +54,7 @@ public:
         //Buradaki değerler file dan alınan değerler ile değiştirilecek.
 
 
-        Employee *employee1 = new Employee(100, "Yusuf", "Sargin", 'M', 123123123, "12321312");
+        Employee *employee1 = new Employee(100, "Yusuf", "Sargin", 'M', 123123123, "12321312",0,0);
 
         return employee1;
     }
