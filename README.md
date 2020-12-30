@@ -20,3 +20,7 @@
 - UserId 1  - password :11 -> Employee
 - UserId 3  - password: 11 -> Human Resources
 - UserId 4  - password: 11 -> Manager
+
+# Class Diagrams
+
+- https://drive.google.com/file/d/1ahL8ZFsXvTTJYBWaIPLNazR9fjhePs1e/view?usp=sharing
