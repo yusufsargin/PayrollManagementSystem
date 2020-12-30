@@ -85,6 +85,9 @@ void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *
         case CHECK_SALARY:
             humanResourcesMainScreen->checkSalary();
             break;
+        case HR_SHOW_ALL_EMPLOYEE:
+            humanResourcesMainScreen->showAllEmployees();
+            break;
         case EXIT:
             storage.setEmployeeList(humanResourcesMainScreen->getEmployeeList());
             isRun = false;
@@ -94,12 +97,25 @@ void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *
     }
 }
 
+void matchAccountToEmployee(vector<Employee *> *employeeList, vector<Account *> *accountList) {
+    for (Employee *employee:*employeeList) {
+        for (Account *account:*accountList) {
+            if (account->getId() == employee->getUserId()) {
+                employee->setAccount(account);
+            }
+        }
+    }
+}
+
 int main() {
     Storage storage;
 
     storage.getTasks();
 
     vector<Employee *> *employeeList = storage.getEmployeeList();
+    vector<Account *> *accountList = storage.getAccounts();
+
+    matchAccountToEmployee(employeeList, accountList);
 
     employeeList->at(0)->headerOfInfoTable();
     for (Employee *emp:*employeeList) {
@@ -144,7 +160,7 @@ int main() {
                 EmployeeOperations(operations, employeeMainScreen, isRun);
                 break;
             case MANAGER_SCREEN:
-                ManagerOperations(operations, managerMainScreen, isRun,storage);
+                ManagerOperations(operations, managerMainScreen, isRun, storage);
                 break;
             case HR_SCREEN:
                 HumanResourcesOperations(operations, humanResourcesMainScreen, isRun, storage);

@@ -297,7 +297,9 @@ public:
     }
 
     double getSalary() override {
-        //this->salary = account->calcSalary(department, workHours, bonus);
+        if (account != nullptr) {
+            this->salary = account->calcSalary(department, workHours, bonus);
+        }
         return salary;
     }
 
@@ -325,6 +327,10 @@ public:
 
     void setDepartmentWithInt(int department) {
         this->department = convertDepartmentType(department);
+    }
+
+    void setAccount(Account *account) {
+        this->account = account;
     }
 };
 

@@ -300,7 +300,6 @@ public:
                 employeeFile << employee->getUserId() << " " << employee->getDepartment() << " " <<
                              "null" << " " << employee->getBonus() << " " <<
                              employee->isActive1() << " " << employee->getWorkHours() << endl;
-                //Task devre dışı
             }
 
             employeeFile.close();

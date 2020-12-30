@@ -12,9 +12,10 @@ using namespace std;
 enum HumanResourcesOperationsTypes {
     ADD_NEW_EMPLOYEE = 1,
     REMOVE_EXIST_EMPLOYEE,
-    UPDATE_EMPLOYEE,
+    DETECT_HOLIDAYS,
     CHECK_SALARY,
-    DETECT_HOLIDAYS
+    UPDATE_EMPLOYEE,
+    HR_SHOW_ALL_EMPLOYEE
 };
 
 class HumanResourcesMainScreen {
@@ -41,7 +42,10 @@ class HumanResourcesMainScreen {
             "0.Exit",
             "1.Add New Employee",
             "2.Remove Exist Employee",
-            "3.Set Holidays"
+            "3.Set Holidays",
+            "4.Check Salary",
+            "5.Update Employee Info",
+            "6.Show All Employee"
     };
     vector<Employee *> *employeeList;
 public:
@@ -164,11 +168,12 @@ public:
         int dec;
         cout<<"Enter ID of the employee: ";
         cin>>ID;
+
         for(int i = 0 ; i < employeeList->size() ; i++)
         {
             cout<<"1-User ID"<<endl<<"2-Password"<<endl<<"3-First name"<<endl<<"4-Last name"<<endl<<"5-TC"<<endl<<"6-Sex"<<endl;
             cout<<"7-Birth date"<<endl<<"8-Phone number"<<endl<<"9-Email address"<<endl<<"10-Child number"<<"11-Work hours"<<endl;
-            cout<<"12-Day offs"<<endl<<"13-Department";
+            cout<<"12-Day offs"<<endl<<"13-Department" << endl<< "14.For Finish" << endl;
             cin>>dec;
             if(ID == employeeList->at(i)->getUserId())
             {
@@ -177,71 +182,101 @@ public:
                         cout << "Enter new user ID: ";
                         cin >> ID;
                         employeeList->at(i)->setUserId(ID);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 2:
                         cout << "Enter password: ";
                         cin >> password;
                         employeeList->at(i)->setPassword(password);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 3:
                         cout<<"Enter first name: ";
                         cin>>firstName;
                         employeeList->at(i)->setFirstName(firstName);
-                        break;
+                            cout << endl;
+                        showAllEmployees();
+                        return;
                     case 4:
                         cout<<"Enter last name: ";
                         cin>>lastName;
                         employeeList->at(i)->setLastName(lastName);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 5:
                         cout<<"Enter TC: ";
                         cin>>TC;
                         employeeList->at(i)->setTc(TC);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 6:
                         cout<<"Enter sex: ";
                         cin>>sex;
                         employeeList->at(i)->setSex(sex);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 7:
                         cout<<"Enter birth date: ";
                         cin>>birthDate;
                         employeeList->at(i)->setBirthDate(birthDate);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 8:
                         cout<<"Enter phone number: ";
                         cin>>phone;
                         employeeList->at(i)->setPhone(phone);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 9:
                         cout<<"Enter e-mail address: ";
                         cin>>email;
                         employeeList->at(i)->setEmail(email);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 10:
                         cout<<"Enter child number: ";
                         cin>>childNumber;
                         employeeList->at(i)->setChildNumber(childNumber);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 11:
                         cout<<"Enter work hours: ";
                         cin>>workHours;
                         employeeList->at(i)->setWorkHours(workHours);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 12:
                         cout<<"Enter paid day offs: ";
                         cin>>dayoffNum;
                         employeeList->at(i)->setDayOffNumber(dayoffNum);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
                     case 13:
                         cout<<"Enter department: ";
                         cin>>department;
                         employeeList->at(i)->setDepartmentWithInt(department);
-                        break;
+                        cout << endl;
+                        showAllEmployees();
+                        return;
+                    case 14:
+                        showAllEmployees();
+                        return;
                     default:
                         cout<<"Invalid operation"<<endl;
                         break;
                 }
+                dec =0;
             }
         }
     }
@@ -276,6 +311,13 @@ public:
         if(exists == false)
         {
             cout<<"Employee does not exist!"<<endl;
+        }
+    }
+
+    void showAllEmployees(){
+        for(Employee *employee:*employeeList){
+            cout << "--------USER " << employee->getUserId() << "---------" << endl;
+            employee->displayMyInfo();
         }
     }
 
