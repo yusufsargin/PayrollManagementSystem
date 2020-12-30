@@ -20,6 +20,9 @@ class Account {
     int id;
     double balance;
     double dayOffsStuff;
+    int footExpense;
+    int transposeExpense;
+    int tax;
 public:
     Account() {
         this->id = 0;
@@ -37,6 +40,9 @@ public:
         id = obj.id;
         balance = obj.balance;
         dayOffsStuff = obj.dayOffsStuff;
+        tax = obj.tax;
+        footExpense = obj.footExpense;
+        transposeExpense = obj.transposeExpense;
     }
 
     ~Account() {
@@ -72,10 +78,11 @@ public:
         return bonus;
     }
 
-    double calcSalary(Department department, double workHours, double bonus,int dayOff,double prevSal)//toplam ay sonu ödenecek maaş
+    double calcSalary(Department department, double workHours, double bonus, int dayOff,
+                      double prevSal)//toplam ay sonu ödenecek maaş
     {
         double sal = 0.0;
-        sal = prevSal - ((prevSal/20)*dayOff);
+        sal = prevSal - ((prevSal / 20) * dayOff);
 
         /*switch (department) {
             case Software_Engineer:
