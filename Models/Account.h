@@ -23,6 +23,7 @@ class Account {
     int footExpense;
     int transposeExpense;
     int tax;
+    int insurance;
 public:
     Account() {
         this->id = 0;
@@ -43,6 +44,7 @@ public:
         tax = obj.tax;
         footExpense = obj.footExpense;
         transposeExpense = obj.transposeExpense;
+        insurance = obj.insurance;
     }
 
     ~Account() {
