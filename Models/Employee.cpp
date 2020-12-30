@@ -25,6 +25,7 @@ class Employee : public People {
     double workHours;
     int taskSize = 0;
     int paidDayOffs;
+    int holidayAmount = 0;
     Account *account = nullptr;
 private:
     string convertTaskStatusTypes(TaskStatus taskStatus) {
@@ -152,6 +153,7 @@ public:
         taskList = new Task[obj.taskSize];
         this->paidDayOffs = obj.paidDayOffs;
         this->taskSize = obj.taskSize;
+        this->holidayAmount = obj.holidayAmount;
         for (int i = 0; i < obj.taskSize; i++) {
             tasks->at(i) = obj.tasks->at(i);
             taskList[i] = obj.taskList[i];
@@ -300,7 +302,7 @@ public:
 
     double getSalary() override {
         if (account != nullptr) {
-            this->salary = account->calcSalary(department, workHours, bonus, paidDayOffs);
+            //this->salary = account->calcSalary(department, workHours, bonus, paidDayOffs,salary);
         }
         return salary;
     }
@@ -337,6 +339,16 @@ public:
 
     Account *getAccount() {
         return account;
+    }
+
+    void setHolidayAmount(int holiday) {
+        this->holidayAmount = holiday;
+
+        this->salary = account->calcSalary(department, workHours, bonus, holidayAmount,salary);
+    }
+
+    int getHolidayAmount(){
+        return holidayAmount;
     }
 };
 

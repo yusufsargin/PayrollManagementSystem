@@ -1,5 +1,7 @@
-userId    password   name    lastName   tc         	sex	birthDate	phone		email			address		    salary      enterDate     childNumber   izinMiktarı
-1	  11   Ali     Yücel	1	M	21/09/1985	05464978743	ali@gmail.com		manolya_apt.	   	4500	14/11/2015	0		14
-2	  11   Memo     TEST	1	M	21/09/1985	05464978743	ali@gmail.com		manolya_apt.	   	4500	14/11/2015	0		14
-3	  11   At     Deneme	1	M	21/09/1985	05464978743	ali@gmail.com		manolya_apt.	   	4500	14/11/2015	0		14
-4	  11   Tewst     test	1	M	21/09/1985	05464978743	ali@gmail.com		manolya_apt.	   	4500	14/11/2015	0		14
+UserId Password Name LastName TC Sex Birth_Date Phone Email Address Salary Enter_Date ChildNumber DayOffNumber
+1 11 tttees Yücel 1 M 21/09/1985 05464978743 ali@gmail.com manolya_apt. 4500 14/11/2015 0 14 
+2 11 testttsas TEST 1 M 21/09/1985 05464978743 ali@gmail.com manolya_apt. 1400 14/11/2015 0 14 
+3 11 At Deneme 1 M 21/09/1985 05464978743 ali@gmail.com manolya_apt. 4500 14/11/2015 0 14 
+4 11 Tewst test 1 M 21/09/1985 05464978743 ali@gmail.com manolya_apt. 0 14/11/2015 0 14 
+6 11 yusuf sargin 15151388 M 30/07/1996 1531315 test@gmaik.com test 5000 30/2/2020 0 14 
+7 11 AT erer 123123 M 19/07/2000 113831 test@gmail.com test 5000 30/12/2020 0 14 

@@ -59,25 +59,23 @@ public:
 
 
     void detectHolidays() {
-        int i,dayoffTYPE;
+        int i, dayoffTYPE;
         cout << "Enter ID of employee: ";
         cin >> ID;
         cout << "Enter day off type (Unpaid or Paid): ";
         cin >> dayoffType;
         cout << "Enter taken day offs: ";
-        cin >> dayoffTYPE;
-        if (dayoffTYPE == 0) {
+        cin >> dayoffNum;
+        if (dayoffType == "unpaid") {
 
             for (i = 0; i < employeeList->size(); i++) {
                 if (employeeList->at(i)->getUserId() == ID) {
-                    int calcNumber = employeeList->at(i)->getWorkHours() - dayoffNum * DAILY_WORK_HOURS;
+                    //int calcNumber = employeeList->at(i)->getWorkHours() - dayoffNum * DAILY_WORK_HOURS;
 
-                    if (calcNumber > 0) {
-                        employeeList->at(i)->setDayoffNumber(calcNumber);
-                    }
+                    employeeList->at(i)->setHolidayAmount(dayoffNum);
                 }
             }
-        } else if (dayoffTYPE ==1) {
+        } else if (dayoffType == "paid") {
             for (i = 0; i < employeeList->size(); i++) {
                 if (employeeList->at(i)->getUserId() == ID) {
                     if (employeeList->at(i)->getDayOffNumber() > 0) {
@@ -167,13 +165,13 @@ public:
         cout << "Enter ID of the employee: ";
         cin >> ID;
 
+        cout << "1-User ID" << endl << "2-Password" << endl << "3-First name" << endl << "4-Last name" << endl
+             << "5-TC" << endl << "6-Sex" << endl;
+        cout << "7-Birth date" << endl << "8-Phone number" << endl << "9-Email address" << endl << "10-Child number"
+             << "11-Work hours" << endl;
+        cout << "12-Day offs" << endl << "13-Department" << endl << "14.For Finish" << endl;
+        cin >> dec;
         for (int i = 0; i < employeeList->size(); i++) {
-            cout << "1-User ID" << endl << "2-Password" << endl << "3-First name" << endl << "4-Last name" << endl
-                 << "5-TC" << endl << "6-Sex" << endl;
-            cout << "7-Birth date" << endl << "8-Phone number" << endl << "9-Email address" << endl << "10-Child number"
-                 << "11-Work hours" << endl;
-            cout << "12-Day offs" << endl << "13-Department" << endl << "14.For Finish" << endl;
-            cin >> dec;
             if (ID == employeeList->at(i)->getUserId()) {
                 switch (dec) {
                     case 1:
