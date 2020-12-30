@@ -121,4 +121,8 @@ public:
 
         manager->assignTaskToEmployee(employeeID, task);
     }
+
+    vector<Employee*> *getEmployeeListFromMangerScreen(){
+        return manager->getEmployeeListManager();
+    }
 };

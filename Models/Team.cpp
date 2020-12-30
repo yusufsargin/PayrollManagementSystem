@@ -84,6 +84,10 @@ public:
             }
         }
     }
+
+    vector<Employee*> *getEmployeeList(){
+        return employeeVector;
+    }
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_TEAM_CPP

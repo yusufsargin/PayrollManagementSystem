@@ -41,7 +41,7 @@ void EmployeeOperations(Operations *operations, EmployeeMainScreen *employeeMain
     }
 }
 
-void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScreen, bool &isRun) {
+void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScreen, bool &isRun, Storage &storage) {
     switch (displayOperationsValuesAndGetValue(*operations, "Manager Options")) {
         case SHOW_MANAGER_INFO:
             managerMainScreen->showManagerInfo();
@@ -59,6 +59,7 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
             managerMainScreen->assignTaskToEmployee();
             break;
         case EXIT:
+            storage.setEmployeeList(managerMainScreen->getEmployeeListFromMangerScreen());
             isRun = false;
             break;
         default:
@@ -143,7 +144,7 @@ int main() {
                 EmployeeOperations(operations, employeeMainScreen, isRun);
                 break;
             case MANAGER_SCREEN:
-                ManagerOperations(operations, managerMainScreen, isRun);
+                ManagerOperations(operations, managerMainScreen, isRun,storage);
                 break;
             case HR_SCREEN:
                 HumanResourcesOperations(operations, humanResourcesMainScreen, isRun, storage);

@@ -83,6 +83,10 @@ public:
     void showManagerInfo() {
         this->employee->displayMyInfo();
     }
+
+    vector<Employee*> *getEmployeeListManager(){
+        return team->getEmployeeList();
+    }
 };
 
 
