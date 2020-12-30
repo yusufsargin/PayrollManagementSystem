@@ -66,7 +66,8 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
     }
 }
 
-void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun, Storage &storage) {
+void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun,
+                              Storage &storage) {
     switch (displayOperationsValuesAndGetValue(*operations, "´Human Resources Options")) {
         case ADD_NEW_EMPLOYEE:
             humanResourcesMainScreen->addNewEmployee();
@@ -100,8 +101,8 @@ int main() {
     vector<Employee *> *employeeList = storage.getEmployeeList();
 
     employeeList->at(0)->headerOfInfoTable();
-    for(Employee *emp:*employeeList){
-       emp->displayMyInfo(true);
+    for (Employee *emp:*employeeList) {
+        emp->displayMyInfo(true);
     }
 
     EmployeeMainScreen *employeeMainScreen = nullptr;
@@ -111,6 +112,11 @@ int main() {
     Operations *operations = nullptr;
     bool isRun = true;
     SCREEN screen = storage.auth();
+
+    for (Employee *employee:*employeeList) {
+        cout << employee->getTasks()->at(0)->getTaskTitle() << endl;
+    }
+
 /*
     cout << "Enter Screen Type:" << endl;
     cout << "0.Employee Screen" << endl;
@@ -140,7 +146,7 @@ int main() {
                 ManagerOperations(operations, managerMainScreen, isRun);
                 break;
             case HR_SCREEN:
-                HumanResourcesOperations(operations, humanResourcesMainScreen, isRun,storage);
+                HumanResourcesOperations(operations, humanResourcesMainScreen, isRun, storage);
                 break;
             default:
                 break;

@@ -42,13 +42,18 @@ public:
 
     void showMembersInfo() {
         for (Employee *employee:*employeeVector) {
-            employee->displayMyInfo();
+            if (employee->getDepartment() != Sales_Manager && employee->getDepartment() != Human_Resources) {
+                cout << "-------USER " << employee->getUserId() << " --------" << endl;
+                employee->displayMyInfo();
+            }
         }
     }
 
     void showMembersTaskList() {
         for (Employee *employee:*employeeVector) {
-            employee->showExistTasks();
+            if (employee->getDepartment() != Sales_Manager && employee->getDepartment() != Human_Resources) {
+                employee->showExistTasks();
+            }
         }
     }
 
@@ -66,7 +71,7 @@ public:
         showMembersTaskList();
     }
 
-    void assignTaskToEmployee(int employeeID, Task task) {
+    void assignTaskToEmployee(int employeeID, Task *task) {
         for (Employee *employee:*employeeVector) {
             if (employee->getUserId() == employeeID) {
                 if (employee->getTasks() != nullptr) {

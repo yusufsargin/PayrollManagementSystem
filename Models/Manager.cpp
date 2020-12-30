@@ -76,7 +76,7 @@ public:
         team->updateTaskDueDate(id, dueDate);
     }
 
-    void assignTaskToEmployee(int employeeID, Task task) {
+    void assignTaskToEmployee(int employeeID, Task *task) {
         team->assignTaskToEmployee(employeeID, task);
     }
 

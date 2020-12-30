@@ -10,6 +10,7 @@
 #include "ScreenType.h"
 #include "Account.h"
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -137,18 +138,13 @@ public:
                                 bonus
                         );
 
-                        this->employeeList->push_back(employee);
-                        /*for (Task *task:*taskList) {
+                        for (Task *task:*taskList) {
                             if (task->getId() == userId) {
-                                *//*for (int i = 0; i < employeeList->size(); i++) {
-                                    if (employeeList->at(i)->getUserId() == userId) {
-                                        Task *taskItem = task;
-                                        this->employeeList->at(i)->assignNewTaskToEmployee(taskItem);
-                                    }
-                                }*//*
+                                employee->assignNewTaskToEmployee(task);
                             }
-                        }*/
+                        }
 
+                        this->employeeList->push_back(employee);
                         //employee->setTasks(tasksForEmployee);
                     }
                 }
@@ -353,14 +349,11 @@ public:
         ifstream readWordPeople(peoplePath);
         while (getline(readWordPeople, line)) {
             readWordPeople >> peopleID;
-            cout << peopleID << endl;
 
             readWordPeople >> Pass;
-            //cout << Pass<<endl;
 
             if (userID == peopleID && password == Pass) {
                 cout << "Enterance is successful!" << endl;
-
 
                 ifstream readWordEmployee(employeePath);
                 while (getline(readWordEmployee, line)) {
@@ -399,8 +392,6 @@ public:
             }
         }
         readWordPeople.close();
-
-        cout << "SCREEEEEEEN " << screen << endl;
         return screen;
     }
 };

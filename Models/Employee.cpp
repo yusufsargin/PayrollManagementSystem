@@ -117,6 +117,7 @@ public:
         this->paidDayOffs = dayOffNumber;
         this->workHours = workHours;
         this->bonus = bonus;
+        this->tasks = new vector<Task *>();
     }
 
     Employee(People const &people, int department, int paidDayOffs) : People(people) {
@@ -187,18 +188,18 @@ public:
     }
 
 
-    bool assignNewTaskToEmployee(Task task) {
+    bool assignNewTaskToEmployee(Task *task) {
         bool isExist = false;
         bool assigned = false;
 
         for (Task *taskInfo : *tasks) {
-            if (taskInfo->getId() == task.getId()) {
+            if (taskInfo->getId() == task->getId()) {
                 isExist = true;
             }
         }
 
         if (!isExist) {
-            tasks->push_back(new Task(task));
+            tasks->push_back(task);
 
             assigned = true;
         }
