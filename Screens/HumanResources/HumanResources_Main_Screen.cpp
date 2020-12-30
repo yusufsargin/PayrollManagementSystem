@@ -35,7 +35,7 @@ class HumanResourcesMainScreen {
     string email;
     string address;
     string dayoffType;
-    string  enterDate;
+    string enterDate;
     double salary;
     Employee *new_employee;
     vector<string> operationsValue{
@@ -59,30 +59,28 @@ public:
 
 
     void detectHolidays() {
-        int i;
-        cout<<"Enter ID of employee: ";
-        cin>>ID;
-        cout<<"Enter day off type (Unpaid or Paid): ";
-        cin>>dayoffType;
-        cout<<"Enter taken day offs: ";
-        cin>>dayoffNum;
-        if(dayoffType == "Unpaid")
-        {
-            for(i = 0 ; i < employeeList->size() ; i++)
-            {
-                if(employeeList->at(i)->getUserId() == ID)
-                {
-                    employeeList->at(i)->setWorkHours(employeeList->at(i)->getWorkHours() - dayoffNum * DAILY_WORK_HOURS);
+        int i,dayoffTYPE;
+        cout << "Enter ID of employee: ";
+        cin >> ID;
+        cout << "Enter day off type (Unpaid or Paid): ";
+        cin >> dayoffType;
+        cout << "Enter taken day offs: ";
+        cin >> dayoffTYPE;
+        if (dayoffTYPE == 0) {
+
+            for (i = 0; i < employeeList->size(); i++) {
+                if (employeeList->at(i)->getUserId() == ID) {
+                    int calcNumber = employeeList->at(i)->getWorkHours() - dayoffNum * DAILY_WORK_HOURS;
+
+                    if (calcNumber > 0) {
+                        employeeList->at(i)->setDayoffNumber(calcNumber);
+                    }
                 }
             }
-        }else if(dayoffType == "paid")
-        {
-            for(i = 0 ; i < employeeList->size() ; i++)
-            {
-                if(employeeList->at(i)->getUserId() == ID)
-                {
-                    if(employeeList->at(i)->getDayOffNumber() > 0)
-                    {
+        } else if (dayoffTYPE ==1) {
+            for (i = 0; i < employeeList->size(); i++) {
+                if (employeeList->at(i)->getUserId() == ID) {
+                    if (employeeList->at(i)->getDayOffNumber() > 0) {
                         employeeList->at(i)->setDayoffNumber(employeeList->at(i)->getDayoffNumber() - dayoffNum);
                     }
                 }
@@ -91,55 +89,55 @@ public:
     }
 
     void addNewEmployee() {
-        cout<<"----------New Employee----------"<<endl;
-        cout<<"Enter user ID: ";
-        cin>>ID;
+        cout << "----------New Employee----------" << endl;
+        cout << "Enter user ID: ";
+        cin >> ID;
         cout << endl;
-        cout<<"Enter password: ";
-        cin>>password;
+        cout << "Enter password: ";
+        cin >> password;
         cout << endl;
-        cout<<"Enter first name: ";
-        cin>>firstName;
+        cout << "Enter first name: ";
+        cin >> firstName;
         cout << endl;
-        cout<<"Enter last name: ";
-        cin>>lastName;
+        cout << "Enter last name: ";
+        cin >> lastName;
         cout << endl;
-        cout<<"Enter TC: ";
-        cin>>TC;
+        cout << "Enter TC: ";
+        cin >> TC;
         cout << endl;
-        cout<<"Enter sex: ";
-        cin>>sex;
+        cout << "Enter sex: ";
+        cin >> sex;
         cout << endl;
-        cout<<"Enter birth date: ";
-        cin>>birthDate;
+        cout << "Enter birth date: ";
+        cin >> birthDate;
         cout << endl;
-        cout<<"Enter phone number: ";
-        cin>>phone;
+        cout << "Enter phone number: ";
+        cin >> phone;
         cout << endl;
-        cout<<"Enter people enter date: ";
-        cin>>enterDate;
+        cout << "Enter people enter date: ";
+        cin >> enterDate;
         cout << endl;
-        cout<<"Enter e-mail address: ";
-        cin>>email;
+        cout << "Enter e-mail address: ";
+        cin >> email;
         cout << endl;
-        cout<<"Enter child number: ";
-        cin>>childNumber;
+        cout << "Enter child number: ";
+        cin >> childNumber;
         cout << endl;
-        cout<<"Enter address: ";
-        cin>>address;
+        cout << "Enter address: ";
+        cin >> address;
         cout << endl;
-        cout<<"Enter work hours: ";
-        cin>>workHours;
+        cout << "Enter work hours: ";
+        cin >> workHours;
         cout << endl;
-        cout<<"Enter paid day offs: ";
-        cin>>dayoffNum;
+        cout << "Enter paid day offs: ";
+        cin >> dayoffNum;
         cout << endl;
-        cout<<"Enter department(0-Software engineer 1-Human resources 2-Sales manager 3-Intern): ";
-        cin>>department;
+        cout << "Enter department(0-Software engineer 1-Human resources 2-Sales manager 3-Intern): ";
+        cin >> department;
         cout << endl;
-        cout<<"Enter salary: ";
-        cin>>salary;
-        cout<<endl;
+        cout << "Enter salary: ";
+        cin >> salary;
+        cout << endl;
 
         employeeList->push_back(new Employee(
                 ID,
@@ -166,17 +164,17 @@ public:
 
     void updateEmployee() {
         int dec;
-        cout<<"Enter ID of the employee: ";
-        cin>>ID;
+        cout << "Enter ID of the employee: ";
+        cin >> ID;
 
-        for(int i = 0 ; i < employeeList->size() ; i++)
-        {
-            cout<<"1-User ID"<<endl<<"2-Password"<<endl<<"3-First name"<<endl<<"4-Last name"<<endl<<"5-TC"<<endl<<"6-Sex"<<endl;
-            cout<<"7-Birth date"<<endl<<"8-Phone number"<<endl<<"9-Email address"<<endl<<"10-Child number"<<"11-Work hours"<<endl;
-            cout<<"12-Day offs"<<endl<<"13-Department" << endl<< "14.For Finish" << endl;
-            cin>>dec;
-            if(ID == employeeList->at(i)->getUserId())
-            {
+        for (int i = 0; i < employeeList->size(); i++) {
+            cout << "1-User ID" << endl << "2-Password" << endl << "3-First name" << endl << "4-Last name" << endl
+                 << "5-TC" << endl << "6-Sex" << endl;
+            cout << "7-Birth date" << endl << "8-Phone number" << endl << "9-Email address" << endl << "10-Child number"
+                 << "11-Work hours" << endl;
+            cout << "12-Day offs" << endl << "13-Department" << endl << "14.For Finish" << endl;
+            cin >> dec;
+            if (ID == employeeList->at(i)->getUserId()) {
                 switch (dec) {
                     case 1:
                         cout << "Enter new user ID: ";
@@ -193,78 +191,78 @@ public:
                         showAllEmployees();
                         return;
                     case 3:
-                        cout<<"Enter first name: ";
-                        cin>>firstName;
+                        cout << "Enter first name: ";
+                        cin >> firstName;
                         employeeList->at(i)->setFirstName(firstName);
-                            cout << endl;
+                        cout << endl;
                         showAllEmployees();
                         return;
                     case 4:
-                        cout<<"Enter last name: ";
-                        cin>>lastName;
+                        cout << "Enter last name: ";
+                        cin >> lastName;
                         employeeList->at(i)->setLastName(lastName);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 5:
-                        cout<<"Enter TC: ";
-                        cin>>TC;
+                        cout << "Enter TC: ";
+                        cin >> TC;
                         employeeList->at(i)->setTc(TC);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 6:
-                        cout<<"Enter sex: ";
-                        cin>>sex;
+                        cout << "Enter sex: ";
+                        cin >> sex;
                         employeeList->at(i)->setSex(sex);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 7:
-                        cout<<"Enter birth date: ";
-                        cin>>birthDate;
+                        cout << "Enter birth date: ";
+                        cin >> birthDate;
                         employeeList->at(i)->setBirthDate(birthDate);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 8:
-                        cout<<"Enter phone number: ";
-                        cin>>phone;
+                        cout << "Enter phone number: ";
+                        cin >> phone;
                         employeeList->at(i)->setPhone(phone);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 9:
-                        cout<<"Enter e-mail address: ";
-                        cin>>email;
+                        cout << "Enter e-mail address: ";
+                        cin >> email;
                         employeeList->at(i)->setEmail(email);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 10:
-                        cout<<"Enter child number: ";
-                        cin>>childNumber;
+                        cout << "Enter child number: ";
+                        cin >> childNumber;
                         employeeList->at(i)->setChildNumber(childNumber);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 11:
-                        cout<<"Enter work hours: ";
-                        cin>>workHours;
+                        cout << "Enter work hours: ";
+                        cin >> workHours;
                         employeeList->at(i)->setWorkHours(workHours);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 12:
-                        cout<<"Enter paid day offs: ";
-                        cin>>dayoffNum;
+                        cout << "Enter paid day offs: ";
+                        cin >> dayoffNum;
                         employeeList->at(i)->setDayOffNumber(dayoffNum);
                         cout << endl;
                         showAllEmployees();
                         return;
                     case 13:
-                        cout<<"Enter department: ";
-                        cin>>department;
+                        cout << "Enter department: ";
+                        cin >> department;
                         employeeList->at(i)->setDepartmentWithInt(department);
                         cout << endl;
                         showAllEmployees();
@@ -273,24 +271,22 @@ public:
                         showAllEmployees();
                         return;
                     default:
-                        cout<<"Invalid operation"<<endl;
+                        cout << "Invalid operation" << endl;
                         break;
                 }
-                dec =0;
+                dec = 0;
             }
         }
     }
 
     void checkSalary() {
         int i;
-        cout<<"Employee ID to check salary: ";
-        cin>>ID;
-        for(i = 0 ; i < employeeList->size() ; i++)
-        {
-            if(employeeList->at(i)->getUserId() == ID)
-            {
-                cout<<"Salary of "<<employeeList->at(i)->getFirstName()<<" "<<employeeList->at(i)->getLastName()
-                    <<": "<<employeeList->at(i)->getSalary()<<endl;
+        cout << "Employee ID to check salary: ";
+        cin >> ID;
+        for (i = 0; i < employeeList->size(); i++) {
+            if (employeeList->at(i)->getUserId() == ID) {
+                cout << "Salary of " << employeeList->at(i)->getFirstName() << " " << employeeList->at(i)->getLastName()
+                     << ": " << employeeList->at(i)->getSalary() << endl;
             }
         }
     }
@@ -298,24 +294,21 @@ public:
     void deleteEmployee() {
         int i;
         bool exists = false;
-        cout<<"Enter employee ID to delete: ";
-        cin>>ID;
-        for(i = 0 ; i < employeeList->size() ; i++)
-        {
-            if(employeeList->at(i)->getUserId() == ID)
-            {
+        cout << "Enter employee ID to delete: ";
+        cin >> ID;
+        for (i = 0; i < employeeList->size(); i++) {
+            if (employeeList->at(i)->getUserId() == ID) {
                 exists = true;
                 employeeList->erase(employeeList->begin() + i);//Test etmeyi unutma!!!
             }
         }
-        if(exists == false)
-        {
-            cout<<"Employee does not exist!"<<endl;
+        if (exists == false) {
+            cout << "Employee does not exist!" << endl;
         }
     }
 
-    void showAllEmployees(){
-        for(Employee *employee:*employeeList){
+    void showAllEmployees() {
+        for (Employee *employee:*employeeList) {
             cout << "--------USER " << employee->getUserId() << "---------" << endl;
             employee->displayMyInfo();
         }

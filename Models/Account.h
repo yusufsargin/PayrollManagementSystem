@@ -72,10 +72,11 @@ public:
         return bonus;
     }
 
-    double calcSalary(Department department, double workHours, double bonus)//toplam ay sonu ödenecek maaş
+    double calcSalary(Department department, double workHours, double bonus,int dayOff)//toplam ay sonu ödenecek maaş
     {
         double hours = workHours, sal = 0.0, soft = 35, hr = 25, salman = 20, inter = 10;
 
+        cout << "DAYOFF " << dayOff << endl;
         switch (department) {
             case Software_Engineer:
                 sal = soft * workHours;
@@ -92,8 +93,8 @@ public:
             default:
                 break;
         }
-        sal = bonus;
         //emp.setBonus(0);
+        sal = sal + bonus;
         this->balance = sal;
         return sal;
     }
@@ -120,6 +121,8 @@ public:
         }
         /*emp.setDayOffNumber(0);*/
         dayOffsStuff = sal;
+
+        return dayOffsStuff;
     }
 
     double calcCompensation(string enterDate)//tazminat

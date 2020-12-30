@@ -168,6 +168,7 @@ public:
         cout << left << setw(GAP) << "Email";
         cout << left << setw(GAP) << "Enter Date";
         cout << left << setw(GAP) << "Child Number";
+        cout << left << setw(GAP) << "Salary";
         cout << left << setw(GAP) << "Day Off Number" << endl;
     }
 
@@ -184,6 +185,7 @@ public:
         cout << left << setw(GAP) << getEmail();
         cout << left << setw(GAP) << getEnterDate();
         cout << left << setw(GAP) << getChildNumber();
+        cout << left << setw(GAP) << getSalary();
         cout << left << setw(GAP) << getDayoffNumber() << endl;
     }
 
@@ -192,11 +194,11 @@ public:
         bool isExist = false;
         bool assigned = false;
 
-        for (Task *taskInfo : *tasks) {
-            if (taskInfo->getId() == task->getId()) {
-                isExist = true;
-            }
-        }
+        /* for (Task *taskInfo : *tasks) {
+             if (taskInfo->getId() == task->getId()) {
+                 isExist = true;
+             }
+         }*/
 
         if (!isExist) {
             tasks->push_back(task);
@@ -298,7 +300,7 @@ public:
 
     double getSalary() override {
         if (account != nullptr) {
-            this->salary = account->calcSalary(department, workHours, bonus);
+            this->salary = account->calcSalary(department, workHours, bonus, paidDayOffs);
         }
         return salary;
     }
@@ -333,7 +335,7 @@ public:
         this->account = account;
     }
 
-    Account *getAccount(){
+    Account *getAccount() {
         return account;
     }
 };
