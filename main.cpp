@@ -97,8 +97,8 @@ void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *
     }
 }
 
-void matchAccountToEmployee(vector<Employee *> *employeeList, vector<Account *> *accountList) {
-    for (Employee *employee:*employeeList) {
+void matchAccountToEmployee(vector<Employee *> &employeeList, vector<Account *> *accountList) {
+    for (Employee *employee:employeeList) {
         for (Account *account:*accountList) {
             if (account->getId() == employee->getUserId()) {
                 employee->setAccount(account);
@@ -110,36 +110,26 @@ void matchAccountToEmployee(vector<Employee *> *employeeList, vector<Account *> 
 int main() {
     Storage storage;
 
-    storage.getTasks();
-
     vector<Employee *> *employeeList = storage.getEmployeeList();
     vector<Account *> *accountList = storage.getAccounts();
 
-    matchAccountToEmployee(employeeList, accountList);
+    matchAccountToEmployee(*employeeList, accountList);
 
     employeeList->at(0)->headerOfInfoTable();
-    for (Employee *emp:*employeeList) {
-        emp->displayMyInfo(true);
+
+    cout << "Employee Size " <<employeeList->size() <<endl;
+
+    for (int i=0;i<employeeList->size();i++) {
+        employeeList->at(i)->displayMyInfo(true);
     }
 
     EmployeeMainScreen *employeeMainScreen = nullptr;
     ManagerMainScreen *managerMainScreen = nullptr;
     HumanResourcesMainScreen *humanResourcesMainScreen = nullptr;
-
     Operations *operations = nullptr;
+
     bool isRun = true;
     SCREEN screen = storage.auth();
-
-    for (Employee *employee:*employeeList) {
-        cout << employee->getTasks()->at(0)->getTaskTitle() << endl;
-    }
-
-/*
-    cout << "Enter Screen Type:" << endl;
-    cout << "0.Employee Screen" << endl;
-    cout << "1.Manager Screen" << endl;
-
-    cin >> screen;*/
 
     if (screen == EMPLOYEE_SCREEN) {
         employeeMainScreen = new EmployeeMainScreen(employeeList->at(0));
@@ -174,6 +164,8 @@ int main() {
     delete employeeMainScreen;
     delete operations;
     delete humanResourcesMainScreen;
+    delete [] accountList;
+    delete [] employeeList;
 
     return 0;
 }

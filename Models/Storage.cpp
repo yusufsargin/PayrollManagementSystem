@@ -57,14 +57,26 @@ public:
         }
     }
 
+    bool hasInEmployeeList(vector<Employee *> *list, int id) {
+        bool isExists = false;
+
+        for (int i = 0; i < list->size(); ++i) {
+            if (list->at(i)->getUserId() == id) {
+                isExists = true;
+            }
+        }
+
+        return isExists;
+    }
+
     vector<Employee *> *getEmployeeList() {
         ifstream peopleFile, employeeFile;
         peopleFile.open(peoplePath);
         employeeFile.open(employeePath);
 
         string line;
-        int userId = 0, childNumber, dayOffNumber, password, department, taskId, bonus, workHours, isActive;
-        string name, tc, lastName, birtDate, phone, email, address, enterDate;
+        int userId = 0, childNumber, dayOffNumber, password, department, bonus, workHours, isActive;
+        string name, tc, lastName, birtDate, phone, email, address, enterDate, taskId;
         char sex;
         double salary;
 
@@ -79,7 +91,7 @@ public:
         vector<int> workHoursList{};
 
         if (peopleFile.is_open()) {
-            while (getline(peopleFile, line)) {
+            while (getline(peopleFile, line) && !peopleFile.eof()) {
                 peopleFile >> userId;
                 peopleFile >> password;
                 peopleFile >> name;
@@ -95,19 +107,24 @@ public:
                 peopleFile >> childNumber;
                 peopleFile >> dayOffNumber;
 
-                if (userId != 0) {
+                if (userId != 0 && name != "") {
                     People *peoplePushItem = new People(userId, password, name, lastName, sex, tc, phone, enterDate,
                                                         childNumber,
                                                         dayOffNumber, salary, address, email, birtDate);
                     people->push_back(peoplePushItem);
                 }
             }
-
             peopleFile.close();
         }
+
         string employeeLine;
+        int sizeOfPeople = people->size();
+        int addedEmployeeSize = 0;
         if (employeeFile.is_open()) {
             while (getline(employeeFile, employeeLine)) {
+                if (employeeFile.eof()) {
+                    break;
+                }
                 employeeFile >> userId;
                 employeeFile >> department;
                 employeeFile >> taskId;
@@ -115,23 +132,25 @@ public:
                 employeeFile >> isActive;
                 employeeFile >> workHours;
 
-                for (People *peopleItem:*people) {
-                    if (peopleItem->getUserId() == userId) {
+                for (int i = 0; i < sizeOfPeople; i++) {
+                    if (people->at(i)->getUserId() == userId && !hasInEmployeeList(employeeList, userId)) {
+                        addedEmployeeSize = addedEmployeeSize + 1;
+
                         Employee *employee = new Employee(
-                                peopleItem->getUserId(),
-                                peopleItem->getPassword(),
-                                peopleItem->getFirstName(),
-                                peopleItem->getLastName(),
-                                peopleItem->getSex(),
-                                peopleItem->getTc(),
-                                peopleItem->getPhone(),
-                                peopleItem->getEnterDate(),
-                                peopleItem->getChildNumber(),
-                                peopleItem->getDayOffNumber(),
-                                peopleItem->getSalary(),
-                                peopleItem->getAddress(),
-                                peopleItem->getEmail(),
-                                peopleItem->getBirthDate(),
+                                people->at(i)->getUserId(),
+                                people->at(i)->getPassword(),
+                                people->at(i)->getFirstName(),
+                                people->at(i)->getLastName(),
+                                people->at(i)->getSex(),
+                                people->at(i)->getTc(),
+                                people->at(i)->getPhone(),
+                                people->at(i)->getEnterDate(),
+                                people->at(i)->getChildNumber(),
+                                people->at(i)->getDayOffNumber(),
+                                people->at(i)->getSalary(),
+                                people->at(i)->getAddress(),
+                                people->at(i)->getEmail(),
+                                people->at(i)->getBirthDate(),
                                 department,
                                 0,
                                 workHours,
@@ -145,12 +164,16 @@ public:
                         }
 
                         this->employeeList->push_back(employee);
-                        //employee->setTasks(tasksForEmployee);
                     }
                 }
+
+
             }
             employeeFile.close();
         }
+
+        delete people;
+        delete taskList;
 
         return employeeList;
     }
@@ -272,16 +295,19 @@ public:
         return accounts;
     }
 
-    void setStorageAccount(vector<Account *> *accountList) {
+    void setStorageAccount() {
         ofstream accountFile;
         accountFile.open(accountPath);
 
         if (accountFile.is_open()) {
             accountFile << "AccountId " << "Balance " << "DayOffStuff \n";
             //accountList->push_back(new Account(4,500,20));
-            for (Account *account:*accountList) {
-                accountFile << account->getId() << " " << account->getBalance() << " " << account->getDayOffsStuff()
-                            << "\n";
+            for (Employee *employee:*employeeList) {
+                if (employee->getAccount() != nullptr && employee->getUserId() == employee->getAccount()->getId()) {
+                    accountFile << employee->getAccount()->getId() << " " << employee->getAccount()->getBalance() << " "
+                                << employee->getAccount()->getDayOffsStuff()
+                                << "\n";
+                }
             }
 
             accountFile.close();
@@ -289,6 +315,7 @@ public:
     }
 
     void setEmployeeList(vector<Employee *> *employeeListInput) {
+        this->employeeList = employeeListInput;
         ofstream employeeFile, peopleFile;
         employeeFile.open(employeePath);
         peopleFile.open(peoplePath);
@@ -309,8 +336,8 @@ public:
             /*userId    password   name    lastName   tc         	sex	birthDate	phone		email			address		    salary      enterDate     childNumber   izinMiktarı*/
             peopleFile << "UserId " << "Password " << "Name " << "LastName " << "TC " << "Sex " << "Birth_Date "
                        << "Phone " << "Email " << "Address " << "Salary " << "Enter_Date " << "ChildNumber "
-                       << "DayOffNumber" << endl;
-            for (Employee *employee:*employeeListInput) {
+                       << "DayOffNumber\n";
+            for (Employee *employee:*employeeList) {
                 peopleFile << employee->getUserId() << " ";
                 peopleFile << employee->getPassword() << " ";
                 peopleFile << employee->getFirstName() << " ";
@@ -324,11 +351,14 @@ public:
                 peopleFile << employee->getSalary() << " ";
                 peopleFile << employee->getEnterDate() << " ";
                 peopleFile << employee->getChildNumber() << " ";
-                peopleFile << employee->getDayoffNumber() << " " << endl;
+                peopleFile << employee->getDayoffNumber() << " \n";
             }
 
             peopleFile.close();
         }
+
+        //AccountSET
+        setStorageAccount();
     }
 
     SCREEN auth() {

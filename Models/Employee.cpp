@@ -332,6 +332,10 @@ public:
     void setAccount(Account *account) {
         this->account = account;
     }
+
+    Account *getAccount(){
+        return account;
+    }
 };
 
 #endif //PAYROLLMANEGEMENTSYSTEM_EMPLOYEE_CPP
