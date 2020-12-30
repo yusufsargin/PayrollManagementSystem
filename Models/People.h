@@ -130,7 +130,7 @@ public:
         return TC;
     }
 
-    void setTc(int tc) {
+    void setTc(string tc) {
         TC = tc;
     }
 

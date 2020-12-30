@@ -292,20 +292,47 @@ public:
         }
     }
 
-    void setEmployeeList(vector<Employee *> *employeeList) {
-        ofstream employeeFile;
+    void setEmployeeList(vector<Employee *> *employeeListInput) {
+        ofstream employeeFile, peopleFile;
         employeeFile.open(employeePath);
+        peopleFile.open(peoplePath);
 
         if (employeeFile.is_open()) {
             /*"userID    Department\tTasks\tbonus\tisActive    stuff\tsigorta\t workHours";*/
             employeeFile << "UserId " << "Department " << "Tasks " << "Bonus " << "isActive " << "workHours" << endl;
-            for (Employee *employee:*employeeList) {
+            for (Employee *employee:*employeeListInput) {
                 employeeFile << employee->getUserId() << " " << employee->getDepartment() << " " <<
-                             employee->getTasks() << " " << employee->getBonus() << " " <<
+                             "null" << " " << employee->getBonus() << " " <<
                              employee->isActive1() << " " << employee->getWorkHours() << endl;
+                //Task devre dışı
             }
 
             employeeFile.close();
+        }
+
+        if (peopleFile.is_open()) {
+            /*userId    password   name    lastName   tc         	sex	birthDate	phone		email			address		    salary      enterDate     childNumber   izinMiktarı*/
+            peopleFile << "UserId " << "Password " << "Name " << "LastName " << "TC " << "Sex " << "Birth_Date "
+                       << "Phone " << "Email " << "Address " << "Salary " << "Enter_Date " << "ChildNumber "
+                       << "DayOffNumber" << endl;
+            for (Employee *employee:*employeeListInput) {
+                peopleFile << employee->getUserId() << " ";
+                peopleFile << employee->getPassword() << " ";
+                peopleFile << employee->getFirstName() << " ";
+                peopleFile << employee->getLastName() << " ";
+                peopleFile << employee->getTc() << " ";
+                peopleFile << employee->getSex() << " ";
+                peopleFile << employee->getBirthDate() << " ";
+                peopleFile << employee->getPhone() << " ";
+                peopleFile << employee->getEmail() << " ";
+                peopleFile << employee->getAddress() << " ";
+                peopleFile << employee->getSalary() << " ";
+                peopleFile << employee->getEnterDate() << " ";
+                peopleFile << employee->getChildNumber() << " ";
+                peopleFile << employee->getDayoffNumber() << " " << endl;
+            }
+
+            peopleFile.close();
         }
     }
 

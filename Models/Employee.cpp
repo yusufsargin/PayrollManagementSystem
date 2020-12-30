@@ -21,7 +21,7 @@ class Employee : public People {
     vector<Task *> *tasks = nullptr;
     Task *taskList = nullptr;
     double bonus;
-    bool isActive;
+    bool isActive = true;
     double workHours;
     int taskSize = 0;
     int paidDayOffs;
@@ -296,7 +296,7 @@ public:
     }
 
     double getSalary() override {
-        this->salary = account->calcSalary(department, workHours, bonus);
+        //this->salary = account->calcSalary(department, workHours, bonus);
         return salary;
     }
 

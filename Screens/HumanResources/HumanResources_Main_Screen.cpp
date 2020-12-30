@@ -27,18 +27,20 @@ class HumanResourcesMainScreen {
     string lastName;
     int department;
     Department dep;
-    int TC;
+    string TC;
     char sex;
     string birthDate;
     string phone;
     string email;
     string address;
     string dayoffType;
+    string  enterDate;
+    double salary;
     Employee *new_employee;
     vector<string> operationsValue{
             "0.Exit",
             "1.Add New Employee",
-            "2.Remove Exist Employee"
+            "2.Remove Exist Employee",
             "3.Set Holidays"
     };
     vector<Employee *> *employeeList;
@@ -69,7 +71,7 @@ public:
                     employeeList->at(i)->setWorkHours(employeeList->at(i)->getWorkHours() - dayoffNum * DAILY_WORK_HOURS);
                 }
             }
-        }else if(dayoffType == "paid");
+        }else if(dayoffType == "paid")
         {
             for(i = 0 ; i < employeeList->size() ; i++)
             {
@@ -88,31 +90,72 @@ public:
         cout<<"----------New Employee----------"<<endl;
         cout<<"Enter user ID: ";
         cin>>ID;
+        cout << endl;
         cout<<"Enter password: ";
         cin>>password;
+        cout << endl;
         cout<<"Enter first name: ";
         cin>>firstName;
+        cout << endl;
         cout<<"Enter last name: ";
         cin>>lastName;
+        cout << endl;
         cout<<"Enter TC: ";
         cin>>TC;
+        cout << endl;
         cout<<"Enter sex: ";
         cin>>sex;
+        cout << endl;
         cout<<"Enter birth date: ";
         cin>>birthDate;
+        cout << endl;
         cout<<"Enter phone number: ";
         cin>>phone;
+        cout << endl;
+        cout<<"Enter people enter date: ";
+        cin>>enterDate;
+        cout << endl;
         cout<<"Enter e-mail address: ";
         cin>>email;
+        cout << endl;
         cout<<"Enter child number: ";
         cin>>childNumber;
+        cout << endl;
+        cout<<"Enter address: ";
+        cin>>address;
+        cout << endl;
         cout<<"Enter work hours: ";
         cin>>workHours;
+        cout << endl;
         cout<<"Enter paid day offs: ";
         cin>>dayoffNum;
+        cout << endl;
         cout<<"Enter department(0-Software engineer 1-Human resources 2-Sales manager 3-Intern): ";
         cin>>department;
+        cout << endl;
+        cout<<"Enter salary: ";
+        cin>>salary;
         cout<<endl;
+
+        employeeList->push_back(new Employee(
+                ID,
+                password,
+                firstName,
+                lastName,
+                sex,
+                TC,
+                phone,
+                enterDate,
+                0,
+                dayoffNum,
+                salary,
+                address,
+                email,
+                birthDate,
+                department,
+                0,
+                45,
+                0));
         //new_employee = new Employee(ID,firstName,lastName,sex,TC,phone , dayoffNum , department);
         //employeeList->push_back(new_employee);
     }

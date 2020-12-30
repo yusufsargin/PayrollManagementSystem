@@ -66,7 +66,7 @@ void ManagerOperations(Operations *operations, ManagerMainScreen *managerMainScr
     }
 }
 
-void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun) {
+void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *humanResourcesMainScreen, bool &isRun, Storage &storage) {
     switch (displayOperationsValuesAndGetValue(*operations, "´Human Resources Options")) {
         case ADD_NEW_EMPLOYEE:
             humanResourcesMainScreen->addNewEmployee();
@@ -84,6 +84,7 @@ void HumanResourcesOperations(Operations *operations, HumanResourcesMainScreen *
             humanResourcesMainScreen->checkSalary();
             break;
         case EXIT:
+            storage.setEmployeeList(humanResourcesMainScreen->getEmployeeList());
             isRun = false;
             break;
         default:
@@ -124,7 +125,7 @@ int main() {
         managerMainScreen = new ManagerMainScreen(employeeList);
         operations = new Operations(managerMainScreen->getManagerOperations());
     } else if (screen == HR_SCREEN) {
-        humanResourcesMainScreen = new HumanResourcesMainScreen();
+        humanResourcesMainScreen = new HumanResourcesMainScreen(employeeList);
         operations = new Operations(humanResourcesMainScreen->getHROperations());
     } else if (screen == IN_VALID_SCREEN) {
         isRun = false;
@@ -139,7 +140,7 @@ int main() {
                 ManagerOperations(operations, managerMainScreen, isRun);
                 break;
             case HR_SCREEN:
-                HumanResourcesOperations(operations, humanResourcesMainScreen, isRun);
+                HumanResourcesOperations(operations, humanResourcesMainScreen, isRun,storage);
                 break;
             default:
                 break;
