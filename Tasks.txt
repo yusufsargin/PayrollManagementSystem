@@ -1,6 +1,6 @@
 id	taskTitle		dueDate		desc	requirement	zorlukDerecesi	taskStatus
 01	process_control		26/12/2020	ghfjv	jjbö		2		0
-02	production		18/12/2020	jgönö	kjbb		5		1
+02	production		18/12/2020	jgönö	kjbb		2		1
 03	quality_check		17/12/2020	jhkkj	jgkg		1		0
 04	production		25/12/2020	hjgjg	bmöm		3		0
 05	report			15/12/2020	jkjön	jhvn		2		0
